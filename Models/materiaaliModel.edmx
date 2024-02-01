@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MatskuniDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Materiaalit">
+          <Key>
+            <PropertyRef Name="MateriaaliID" />
+          </Key>
+          <Property Name="MateriaaliID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Materiaali" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ryhmät">
+          <Key>
+            <PropertyRef Name="RyhmäID" />
+          </Key>
+          <Property Name="RyhmäID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ryhmä" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tuotteet">
+          <Key>
+            <PropertyRef Name="TuoteID" />
+          </Key>
+          <Property Name="TuoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tuotenimi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pesty" Type="bit" />
+          <Property Name="Määrä" Type="nvarchar" MaxLength="50" />
+          <Property Name="RyhmäID" Type="int" />
+          <Property Name="MateriaaliID" Type="int" />
+          <Property Name="ValmistajaID" Type="int" />
+          <Property Name="ImageLink" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Valmistajat">
+          <Key>
+            <PropertyRef Name="ValmistajaID" />
+          </Key>
+          <Property Name="ValmistajaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Valmistaja" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Tuote_Materiaali">
+          <End Role="Materiaalit" Type="Self.Materiaalit" Multiplicity="0..1" />
+          <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materiaalit">
+              <PropertyRef Name="MateriaaliID" />
+            </Principal>
+            <Dependent Role="Tuotteet">
+              <PropertyRef Name="MateriaaliID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tuote_Ryhmä">
+          <End Role="Ryhmät" Type="Self.Ryhmät" Multiplicity="0..1" />
+          <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ryhmät">
+              <PropertyRef Name="RyhmäID" />
+            </Principal>
+            <Dependent Role="Tuotteet">
+              <PropertyRef Name="RyhmäID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tuote_Valmistaja">
+          <End Role="Valmistajat" Type="Self.Valmistajat" Multiplicity="0..1" />
+          <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Valmistajat">
+              <PropertyRef Name="ValmistajaID" />
+            </Principal>
+            <Dependent Role="Tuotteet">
+              <PropertyRef Name="ValmistajaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MatskuniDBModelStoreContainer">
+          <EntitySet Name="Materiaalit" EntityType="Self.Materiaalit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ryhmät" EntityType="Self.Ryhmät" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tuotteet" EntityType="Self.Tuotteet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Valmistajat" EntityType="Self.Valmistajat" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Tuote_Materiaali" Association="Self.FK_Tuote_Materiaali">
+            <End Role="Materiaalit" EntitySet="Materiaalit" />
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tuote_Ryhmä" Association="Self.FK_Tuote_Ryhmä">
+            <End Role="Ryhmät" EntitySet="Ryhmät" />
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tuote_Valmistaja" Association="Self.FK_Tuote_Valmistaja">
+            <End Role="Valmistajat" EntitySet="Valmistajat" />
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MatskuniDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Materiaalit">
+          <Key>
+            <PropertyRef Name="MateriaaliID" />
+          </Key>
+          <Property Name="MateriaaliID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Materiaali" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tuotteet" Relationship="Self.FK_Tuote_Materiaali" FromRole="Materiaalit" ToRole="Tuotteet" />
+        </EntityType>
+        <EntityType Name="Ryhmät">
+          <Key>
+            <PropertyRef Name="RyhmäID" />
+          </Key>
+          <Property Name="RyhmäID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ryhmä" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tuotteet" Relationship="Self.FK_Tuote_Ryhmä" FromRole="Ryhmät" ToRole="Tuotteet" />
+        </EntityType>
+        <EntityType Name="Tuotteet">
+          <Key>
+            <PropertyRef Name="TuoteID" />
+          </Key>
+          <Property Name="TuoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tuotenimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pesty" Type="Boolean" />
+          <Property Name="Määrä" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RyhmäID" Type="Int32" />
+          <Property Name="MateriaaliID" Type="Int32" />
+          <Property Name="ValmistajaID" Type="Int32" />
+          <Property Name="ImageLink" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Materiaalit" Relationship="Self.FK_Tuote_Materiaali" FromRole="Tuotteet" ToRole="Materiaalit" />
+          <NavigationProperty Name="Ryhmät" Relationship="Self.FK_Tuote_Ryhmä" FromRole="Tuotteet" ToRole="Ryhmät" />
+          <NavigationProperty Name="Valmistajat" Relationship="Self.FK_Tuote_Valmistaja" FromRole="Tuotteet" ToRole="Valmistajat" />
+        </EntityType>
+        <EntityType Name="Valmistajat">
+          <Key>
+            <PropertyRef Name="ValmistajaID" />
+          </Key>
+          <Property Name="ValmistajaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Valmistaja" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tuotteet" Relationship="Self.FK_Tuote_Valmistaja" FromRole="Valmistajat" ToRole="Tuotteet" />
+        </EntityType>
+        <Association Name="FK_Tuote_Materiaali">
+          <End Role="Materiaalit" Type="Self.Materiaalit" Multiplicity="0..1" />
+          <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materiaalit">
+              <PropertyRef Name="MateriaaliID" />
+            </Principal>
+            <Dependent Role="Tuotteet">
+              <PropertyRef Name="MateriaaliID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tuote_Ryhmä">
+          <End Role="Ryhmät" Type="Self.Ryhmät" Multiplicity="0..1" />
+          <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ryhmät">
+              <PropertyRef Name="RyhmäID" />
+            </Principal>
+            <Dependent Role="Tuotteet">
+              <PropertyRef Name="RyhmäID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tuote_Valmistaja">
+          <End Role="Valmistajat" Type="Self.Valmistajat" Multiplicity="0..1" />
+          <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Valmistajat">
+              <PropertyRef Name="ValmistajaID" />
+            </Principal>
+            <Dependent Role="Tuotteet">
+              <PropertyRef Name="ValmistajaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MatskuniDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Materiaalit" EntityType="Self.Materiaalit" />
+          <EntitySet Name="Ryhmät" EntityType="Self.Ryhmät" />
+          <EntitySet Name="Tuotteet" EntityType="Self.Tuotteet" />
+          <EntitySet Name="Valmistajat" EntityType="Self.Valmistajat" />
+          <AssociationSet Name="FK_Tuote_Materiaali" Association="Self.FK_Tuote_Materiaali">
+            <End Role="Materiaalit" EntitySet="Materiaalit" />
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tuote_Ryhmä" Association="Self.FK_Tuote_Ryhmä">
+            <End Role="Ryhmät" EntitySet="Ryhmät" />
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tuote_Valmistaja" Association="Self.FK_Tuote_Valmistaja">
+            <End Role="Valmistajat" EntitySet="Valmistajat" />
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MatskuniDBModelStoreContainer" CdmEntityContainer="MatskuniDBEntities1">
+          <EntitySetMapping Name="Materiaalit">
+            <EntityTypeMapping TypeName="MatskuniDBModel.Materiaalit">
+              <MappingFragment StoreEntitySet="Materiaalit">
+                <ScalarProperty Name="MateriaaliID" ColumnName="MateriaaliID" />
+                <ScalarProperty Name="Materiaali" ColumnName="Materiaali" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ryhmät">
+            <EntityTypeMapping TypeName="MatskuniDBModel.Ryhmät">
+              <MappingFragment StoreEntitySet="Ryhmät">
+                <ScalarProperty Name="RyhmäID" ColumnName="RyhmäID" />
+                <ScalarProperty Name="Ryhmä" ColumnName="Ryhmä" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tuotteet">
+            <EntityTypeMapping TypeName="MatskuniDBModel.Tuotteet">
+              <MappingFragment StoreEntitySet="Tuotteet">
+                <ScalarProperty Name="TuoteID" ColumnName="TuoteID" />
+                <ScalarProperty Name="Tuotenimi" ColumnName="Tuotenimi" />
+                <ScalarProperty Name="Pesty" ColumnName="Pesty" />
+                <ScalarProperty Name="Määrä" ColumnName="Määrä" />
+                <ScalarProperty Name="RyhmäID" ColumnName="RyhmäID" />
+                <ScalarProperty Name="MateriaaliID" ColumnName="MateriaaliID" />
+                <ScalarProperty Name="ValmistajaID" ColumnName="ValmistajaID" />
+                <ScalarProperty Name="ImageLink" ColumnName="ImageLink" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Valmistajat">
+            <EntityTypeMapping TypeName="MatskuniDBModel.Valmistajat">
+              <MappingFragment StoreEntitySet="Valmistajat">
+                <ScalarProperty Name="ValmistajaID" ColumnName="ValmistajaID" />
+                <ScalarProperty Name="Valmistaja" ColumnName="Valmistaja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

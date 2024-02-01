@@ -1,0 +1,13 @@
+﻿@model IEnumerable<MateriaaliVarasto.Models.Tuotteet>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h5>Tuotteita @Model.Count() kappaletta</h5>
+@foreach (MateriaaliVarasto.Models.Tuotteet tuot in Model)
+{
+    
+    <p>@tuot.Tuotenimi</p>
+}
+<h2>Index</h2>
+

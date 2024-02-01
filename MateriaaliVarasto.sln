@@ -5,8 +5,6 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MateriaaliVarasto", "MateriaaliVarasto.csproj", "{1E761B16-3CD5-4AF9-A7EA-A3D14EBC2F20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MateriaaliVarasto.Tests", "..\MateriaaliVarasto.Tests\MateriaaliVarasto.Tests.csproj", "{12503028-8C10-43E1-B3DC-34785EB9DC20}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{1E761B16-3CD5-4AF9-A7EA-A3D14EBC2F20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E761B16-3CD5-4AF9-A7EA-A3D14EBC2F20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E761B16-3CD5-4AF9-A7EA-A3D14EBC2F20}.Release|Any CPU.Build.0 = Release|Any CPU
-		{12503028-8C10-43E1-B3DC-34785EB9DC20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{12503028-8C10-43E1-B3DC-34785EB9DC20}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{12503028-8C10-43E1-B3DC-34785EB9DC20}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{12503028-8C10-43E1-B3DC-34785EB9DC20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

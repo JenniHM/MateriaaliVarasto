@@ -15,14 +15,14 @@ namespace MateriaaliVarasto.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Tietoja sovelluksesta.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Yhteystiedot.";
 
             return View();
         }
