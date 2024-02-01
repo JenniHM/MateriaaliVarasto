@@ -2,12 +2,53 @@
 @{
     ViewBag.Title = "Index";
 }
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $(".showProductId").click(function () {
+                var tuoteId = $(this).data("tuoteid");
+                alert(tuoteId);
+            });
+        });
 
-<h5>Tuotteita @Model.Count() kappaletta</h5>
-@foreach (MateriaaliVarasto.Models.Tuotteet tuot in Model)
-{
-    
-    <p>@tuot.Tuotenimi</p>
-}
+        $(function () {
+            $("#poistaTuote").click(function () {
+                var tuoteId = $(this).data("tuoteid");
+                alert(tuoteId);
+            });
+        });
+        </script>
+    }
 <h2>Index</h2>
+<h5>Tuotteita @Model.Count() kappaletta</h5>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Tuote ID</th>
+            <th>Tuotenimi</th>
+            <th>Pesty?</th>
+            <th>Määrä</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (MateriaaliVarasto.Models.Tuotteet tuot in Model)
+        {
+        <tr>
+            <td>@tuot.TuoteID</td>
+            <td>@tuot.Tuotenimi</td>
+            <td>@tuot.Pesty</td>
+            <td>@tuot.Määrä</td>
+            <td><button class="btn btn-success" onclick='naytaValittuTuote("@tuot.Tuotenimi")'>Muokkaa</button></td>
+            <td><button class="btn btn-primary showProductId" data-TuoteID="@tuot.TuoteID">Muokkaa</button></td>
+            <td><button class="btn btn-danger" data-TuoteID="@tuot.TuoteID" id="poistaTuote">Poista</button></td>
+        </tr>
+        }
+    </tbody>
+</table>
 
+
+<script>
+    function naytaValittuTuote(tuoteID) {
+        alert(tuoteID);
+    }
+</script>
