@@ -1,54 +1,40 @@
 ﻿@model IEnumerable<MateriaaliVarasto.Models.Tuotteet>
+
 @{
     ViewBag.Title = "Index";
 }
-@section scripts {
-    <script type="text/javascript">
-        $(function () {
-            $(".showProductId").click(function () {
-                var tuoteId = $(this).data("tuoteid");
-                alert(tuoteId);
-            });
-        });
 
-        $(function () {
-            $("#poistaTuote").click(function () {
-                var tuoteId = $(this).data("tuoteid");
-                alert(tuoteId);
-            });
-        });
-        </script>
-    }
-<h2>Index</h2>
-<h5>Tuotteita @Model.Count() kappaletta</h5>
+<h2>Tuotteita varastossa  (Index)</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Tuote ID</th>
-            <th>Tuotenimi</th>
-            <th>Pesty?</th>
-            <th>Määrä</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (MateriaaliVarasto.Models.Tuotteet tuot in Model)
-        {
-        <tr>
-            <td>@tuot.TuoteID</td>
-            <td>@tuot.Tuotenimi</td>
-            <td>@tuot.Pesty</td>
-            <td>@tuot.Määrä</td>
-            <td><button class="btn btn-success" onclick='naytaValittuTuote("@tuot.Tuotenimi")'>Muokkaa</button></td>
-            <td><button class="btn btn-primary showProductId" data-TuoteID="@tuot.TuoteID">Muokkaa</button></td>
-            <td><button class="btn btn-danger" data-TuoteID="@tuot.TuoteID" id="poistaTuote">Poista</button></td>
-        </tr>
-        }
-    </tbody>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Tuotenimi)</th>
+        <th>@Html.DisplayNameFor(model => model.Pesty)</th>
+        <th>@Html.DisplayNameFor(model => model.Määrä)</th>
+        <th>@Html.DisplayNameFor(model => model.ImageLink)</th>
+        <th>@Html.DisplayNameFor(model => model.Materiaalit.Materiaali)</th>
+        <th>@Html.DisplayNameFor(model => model.Ryhmät.Ryhmä)</th>
+        <th>@Html.DisplayNameFor(model => model.Valmistajat.Valmistaja)</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.Tuotenimi)</td>
+        <td>@Html.DisplayFor(modelItem => item.Pesty)</td>
+        <td>@Html.DisplayFor(modelItem => item.Määrä)</td>
+        <td>@Html.DisplayFor(modelItem => item.ImageLink)</td>
+        <td>@Html.DisplayFor(modelItem => item.Materiaalit.Materiaali)</td>
+        <td>@Html.DisplayFor(modelItem => item.Ryhmät.Ryhmä)</td>
+        <td>@Html.DisplayFor(modelItem => item.Valmistajat.Valmistaja)</td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TuoteID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TuoteID })
+        </td>
+    </tr>
+}
+
 </table>
-
-
-<script>
-    function naytaValittuTuote(tuoteID) {
-        alert(tuoteID);
-    }
-</script>

@@ -1,0 +1,60 @@
+﻿@model MateriaaliVarasto.Models.Tuotteet
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Tuotteet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Tuotenimi)</dt>
+
+        <dd>@Html.DisplayFor(model => model.Tuotenimi)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Pesty)</dt>
+
+        <dd>@Html.DisplayFor(model => model.Pesty)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Määrä)</dt>
+
+        <dd>@Html.DisplayFor(model => model.Määrä)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.ImageLink)</dt>
+
+        <dd>@Html.DisplayFor(model => model.ImageLink)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Materiaalit.Materiaali)</dt>
+
+        <dd>@Html.DisplayFor(model => model.Materiaalit.Materiaali)</dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ryhmät.Ryhmä)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ryhmät.Ryhmä)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Valmistajat.Valmistaja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valmistajat.Valmistaja)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
