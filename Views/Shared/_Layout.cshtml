@@ -11,7 +11,7 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#">Navigointi</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor04" aria-controls="navbarColor04" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -24,23 +24,45 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Home/Contact">Kontaktit</a>
+                        <a class="nav-link" href="#">Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Product/Index">Tuotteet</a>
+                        <a class="nav-link" href="#">Pricing</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tuotteet</a>
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">DropdownTabs</a>
                         <div class="dropdown-menu">
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/Index">Index</a></li>
-                                <li><a class="dropdown-item" href="/About">About</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
+                            <a class="dropdown-item" href="/Home/Contact">Yhteystiedot</a>
+                            <a class="dropdown-item" href="/Home/Index">Koti</a>
+                            <a class="dropdown-item" href="/Product/Index">Tuotteet</a>
+                            <a class="dropdown-item" href="/Materials/Index">Koti</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
                         </div>
+                    </li>
+                </ul>
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Active</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle show" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">DropdownPills</a>
+                        <div class="dropdown-menu show" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 42.4px, 0px);">
+                            <h6 class="dropdown-header">Dropdown header</h6>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                           
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Disabled</a>
                     </li>
                 </ul>
                 <form class="d-flex">
@@ -51,26 +73,27 @@
         </div>
     </nav>
 
+   
     @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-                    <div class="container">
-                        @Html.ActionLink("In Order", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                            <ul class="navbar-nav flex-grow-1">
-                                <li>@Html.ActionLink("Koti", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                                <li>@Html.ActionLink("Ohjeet", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                                <li>@Html.ActionLink("Tuotteet", "Index", "Product", new { area = "" }, new { @class = "nav-link" })</li>
-                                <li>@Html.ActionLink("Materiaalit", "Index", "Materials", new { area = "" }, new { @class = "nav-link" })</li>
+            <div class="container">
+                @Html.ActionLink("In Order", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li>@Html.ActionLink("Koti", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Ohjeet", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Tuotteet", "Index", "Product", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Materiaalit", "Index", "Materials", new { area = "" }, new { @class = "nav-link" })</li>
 
-                            </ul>
-                            
+                    </ul>
 
-                        </div>
-                    </div>
-                </nav>*@
+
+                </div>
+            </div>
+        </nav>*@
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -82,6 +105,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
 
 
 </body>
