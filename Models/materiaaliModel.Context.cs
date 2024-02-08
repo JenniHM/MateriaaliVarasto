@@ -25,6 +25,7 @@ namespace MateriaaliVarasto.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Logins> Logins { get; set; }
         public virtual DbSet<Materiaalit> Materiaalit { get; set; }
         public virtual DbSet<Ryhmät> Ryhmät { get; set; }
         public virtual DbSet<Tuotteet> Tuotteet { get; set; }

@@ -126,6 +126,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Logins.cs">
+      <DependentUpon>materiaaliModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\materiaaliModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

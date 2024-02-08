@@ -5,13 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="68cd52d4c6a440598a359490d758628e" Name="Diagram1">
-        <EntityTypeShape EntityType="MatskuniDBModel.Materiaalit" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MatskuniDBModel.Ryhmät" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MatskuniDBModel.Tuotteet" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="MatskuniDBModel.Valmistajat" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
-        <AssociationConnector Association="MatskuniDBModel.FK_Tuote_Materiaali" ManuallyRouted="false" />
-        <AssociationConnector Association="MatskuniDBModel.FK_Tuote_Ryhmä" ManuallyRouted="false" />
-        <AssociationConnector Association="MatskuniDBModel.FK_Tuote_Valmistaja" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MatskuniDBModel.Logins" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MatskuniDBModel.Materiaalit" Width="1.5" PointX="0.75" PointY="4.875" />
+        <EntityTypeShape EntityType="MatskuniDBModel.Ryhmät" Width="1.5" PointX="0.75" PointY="7.25" />
+        <EntityTypeShape EntityType="MatskuniDBModel.Tuotteet" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="MatskuniDBModel.Valmistajat" Width="1.5" PointX="0.75" PointY="1.75" />
+        <AssociationConnector Association="MatskuniDBModel.FK_Tuote_Materiaali" />
+        <AssociationConnector Association="MatskuniDBModel.FK_Tuote_Ryhmä" />
+        <AssociationConnector Association="MatskuniDBModel.FK_Tuote_Valmistaja" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
