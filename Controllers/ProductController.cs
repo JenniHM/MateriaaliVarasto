@@ -16,10 +16,21 @@ namespace MateriaaliVarasto.Controllers
         // GET: Product
         public ActionResult Index()
         {
-            List<Tuotteet> model = db.Tuotteet.ToList();
-            return View(model);
+            if (Session["UserName"] == null)
+            {
+                ViewBag.LoggedStatus = "Out";
+                return RedirectToAction("login", "home");
+            }
+            else
+            {                
+                List<Tuotteet> model = db.Tuotteet.ToList();
+                ViewBag.LoggedStatus = "In";
+                db.Dispose();
+                return View(model);
+            }
+           
         }
-
+        
         [HttpGet]
         public ActionResult Edit(int? id)
         {

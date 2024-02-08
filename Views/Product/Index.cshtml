@@ -4,25 +4,27 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Tuotteita varastossa  (Index)</h2>
+<h2>Tuotteita varastossa  </h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table table-hover">
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.Tuotenimi)</th>
-        <th>@Html.DisplayNameFor(model => model.Pesty)</th>
-        <th>@Html.DisplayNameFor(model => model.Määrä)</th>
-        <th>@Html.DisplayNameFor(model => model.ImageLink)</th>
-        <th>@Html.DisplayNameFor(model => model.Materiaalit.Materiaali)</th>
-        <th>@Html.DisplayNameFor(model => model.Ryhmät.Ryhmä)</th>
-        <th>@Html.DisplayNameFor(model => model.Valmistajat.Valmistaja)</th>
-        <th></th>
-    </tr>
+    <thead class="table-success">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Tuotenimi)</th>
+            <th>@Html.DisplayNameFor(model => model.Pesty)</th>
+            <th>@Html.DisplayNameFor(model => model.Määrä)</th>
+            <th>@Html.DisplayNameFor(model => model.ImageLink)</th>
+            <th>@Html.DisplayNameFor(model => model.Materiaalit.Materiaali)</th>
+            <th>@Html.DisplayNameFor(model => model.Ryhmät.Ryhmä)</th>
+            <th>@Html.DisplayNameFor(model => model.Valmistajat.Valmistaja)</th>
+            <th></th>
+        </tr>
+    </thead>
 
 @foreach (var item in Model) {
-    <tr>
+    <tr class="table-warning">
         <td>@Html.DisplayFor(modelItem => item.Tuotenimi)</td>
         <td>@Html.DisplayFor(modelItem => item.Pesty)</td>
         <td>@Html.DisplayFor(modelItem => item.Määrä)</td>

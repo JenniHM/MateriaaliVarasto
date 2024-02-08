@@ -47,7 +47,7 @@
           <Property Name="ValmistajaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Valmistaja" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Tuote_Materiaali">
+        <Association Name="FK_Tuotteet_Materiaalit">
           <End Role="Materiaalit" Type="Self.Materiaalit" Multiplicity="0..1" />
           <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="*" />
           <ReferentialConstraint>
@@ -59,7 +59,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tuote_Ryhmä">
+        <Association Name="FK_Tuotteet_Ryhmät">
           <End Role="Ryhmät" Type="Self.Ryhmät" Multiplicity="0..1" />
           <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="*" />
           <ReferentialConstraint>
@@ -71,7 +71,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tuote_Valmistaja">
+        <Association Name="FK_Tuotteet_Valmistaja">
           <End Role="Valmistajat" Type="Self.Valmistajat" Multiplicity="0..1" />
           <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="*" />
           <ReferentialConstraint>
@@ -89,15 +89,15 @@
           <EntitySet Name="Ryhmät" EntityType="Self.Ryhmät" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tuotteet" EntityType="Self.Tuotteet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Valmistajat" EntityType="Self.Valmistajat" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Tuote_Materiaali" Association="Self.FK_Tuote_Materiaali">
+          <AssociationSet Name="FK_Tuotteet_Materiaalit" Association="Self.FK_Tuotteet_Materiaalit">
             <End Role="Materiaalit" EntitySet="Materiaalit" />
             <End Role="Tuotteet" EntitySet="Tuotteet" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tuote_Ryhmä" Association="Self.FK_Tuote_Ryhmä">
+          <AssociationSet Name="FK_Tuotteet_Ryhmät" Association="Self.FK_Tuotteet_Ryhmät">
             <End Role="Ryhmät" EntitySet="Ryhmät" />
             <End Role="Tuotteet" EntitySet="Tuotteet" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tuote_Valmistaja" Association="Self.FK_Tuote_Valmistaja">
+          <AssociationSet Name="FK_Tuotteet_Valmistaja" Association="Self.FK_Tuotteet_Valmistaja">
             <End Role="Valmistajat" EntitySet="Valmistajat" />
             <End Role="Tuotteet" EntitySet="Tuotteet" />
           </AssociationSet>

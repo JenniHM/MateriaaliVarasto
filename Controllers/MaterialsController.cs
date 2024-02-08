@@ -16,8 +16,16 @@ namespace MateriaaliVarasto.Controllers
         // GET: Materials
         public ActionResult Index()
         {
-            List<Materiaalit> model = db.Materiaalit.ToList();
-            return View(model);
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("login", "home");
+            }
+            else
+            {
+                List<Materiaalit> model = db.Materiaalit.ToList();
+                db.Dispose();
+                return View(model);
+            }
         }
 
        
