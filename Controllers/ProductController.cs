@@ -1,32 +1,89 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using MateriaaliVarasto.Models;
+using Microsoft.Ajax.Utilities;
+using PagedList;
 
 namespace MateriaaliVarasto.Controllers
 {
     public class ProductController : Controller
     {
+        
+           
         MatskuniDBEntities1 db = new MatskuniDBEntities1();
         // GET: Product
-        public ActionResult Index()
+        public ActionResult Index(string sortProd, string currentFilter1, string searchString1, int? page, int? pagesize)
         {
+            ViewBag.CurrentSort = sortProd;
+            ViewBag.ProdNameSortPara = String.IsNullOrEmpty(sortProd) ? "productname_desc" : "";
+
+
+
             if (Session["UserName"] == null)
             {
                 ViewBag.LoggedStatus = "Out";
                 return RedirectToAction("login", "home");
             }
             else
-            {                
-                List<Tuotteet> model = db.Tuotteet.ToList();
+            {
                 ViewBag.LoggedStatus = "In";
-                db.Dispose();
-                return View(model);
+
+                if (searchString1 != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    searchString1 = currentFilter1;
+                }
+
+                ViewBag.currentFilter1 = searchString1;
+
+                var tuotteet = from t in db.Tuotteet
+                               select t;
+
+                if (!String.IsNullOrEmpty(searchString1))
+                {
+
+                    switch (sortProd)
+                    {
+                        case "productname_desc":
+                            tuotteet = tuotteet.Where(t => t.Tuotenimi.Contains(searchString1)).OrderByDescending(t => t.Tuotenimi);
+                            break;
+
+                        default:
+                            tuotteet = tuotteet.Where(t => t.Tuotenimi.Contains(searchString1)).OrderBy(t => t.Tuotenimi);
+                            break;
+                    }
+
+                }
+                else
+                {
+                    switch (sortProd)
+                    {
+                        case "productname_desc":
+                            tuotteet = tuotteet.OrderByDescending(t => t.Tuotenimi);
+                            break;
+
+                        default:
+                            tuotteet = tuotteet.OrderBy(t => t.Tuotenimi);
+                            break;
+                    }
+                }
+            
+
+            
+                int pageSize = (pagesize ?? 10);
+                int pageNumber = (page ?? 1);
+                return View(tuotteet.ToPagedList(pageNumber, pageSize));
             }
            
         }

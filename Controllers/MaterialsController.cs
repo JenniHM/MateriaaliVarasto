@@ -23,7 +23,7 @@ namespace MateriaaliVarasto.Controllers
             else
             {
                 List<Materiaalit> model = db.Materiaalit.ToList();
-                db.Dispose();
+                
                 return View(model);
             }
         }

@@ -1,4 +1,6 @@
-﻿@model IEnumerable<MateriaaliVarasto.Models.Tuotteet>
+﻿@model PagedList.IPagedList<MateriaaliVarasto.Models.Tuotteet>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Index";
@@ -9,34 +11,54 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("Index", "Product", FormMethod.Get))
+{
+    <div class="input-group">
+        <p class="px-1">@Html.Label("Etsi nimellä:")</p>
+        <p class="px-1">@Html.TextBox("SearchString1", ViewBag.currentFilter1 as string, new { @class = "form-control" })</p>
+        <p class="px-1"><input type="submit" value="Search" class="form-control" /></p>
+    </div>
+}
+
 <table class="table table-hover">
     <thead class="table-success">
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Tuotenimi)</th>
-            <th>@Html.DisplayNameFor(model => model.Pesty)</th>
-            <th>@Html.DisplayNameFor(model => model.Määrä)</th>
-            <th>@Html.DisplayNameFor(model => model.ImageLink)</th>
-            <th>@Html.DisplayNameFor(model => model.Materiaalit.Materiaali)</th>
-            <th>@Html.DisplayNameFor(model => model.Ryhmät.Ryhmä)</th>
+            <th>@Html.ActionLink("Tuotteen nimi", "Index", new { sortProd = ViewBag.ProdNameSortPara, currentFilter1 = ViewBag.currentFilter1 })</th>
             <th>@Html.DisplayNameFor(model => model.Valmistajat.Valmistaja)</th>
+            <th>@Html.DisplayNameFor(model => model.Ryhmät.Ryhmä)</th>
+            <th>@Html.DisplayNameFor(model => model.Määrä)</th>
+            <th>@Html.DisplayNameFor(model => model.Materiaalit.Materiaali)</th>
+            <th>@Html.DisplayNameFor(model => model.Pesty)</th>
+            <th>@Html.DisplayNameFor(model => model.ImageLink)</th>
+
             <th></th>
         </tr>
     </thead>
 
-@foreach (var item in Model) {
-    <tr class="table-warning">
-        <td>@Html.DisplayFor(modelItem => item.Tuotenimi)</td>
-        <td>@Html.DisplayFor(modelItem => item.Pesty)</td>
-        <td>@Html.DisplayFor(modelItem => item.Määrä)</td>
-        <td>@Html.DisplayFor(modelItem => item.ImageLink)</td>
-        <td>@Html.DisplayFor(modelItem => item.Materiaalit.Materiaali)</td>
-        <td>@Html.DisplayFor(modelItem => item.Ryhmät.Ryhmä)</td>
-        <td>@Html.DisplayFor(modelItem => item.Valmistajat.Valmistaja)</td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TuoteID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TuoteID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr class="table-warning">
+            <td>@Html.DisplayFor(modelItem => item.Tuotenimi)</td>
+            <td>@Html.DisplayFor(modelItem => item.Valmistajat.Valmistaja)</td>
+            <td>@Html.DisplayFor(modelItem => item.Ryhmät.Ryhmä)</td>
+            <td>@Html.DisplayFor(modelItem => item.Määrä)</td>
+            <td>@Html.DisplayFor(modelItem => item.Materiaalit.Materiaali)</td>
+            <td>@Html.DisplayFor(modelItem => item.Pesty)</td>
+            <td>@Html.DisplayFor(modelItem => item.ImageLink)</td>
+
+
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TuoteID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TuoteID })
+            </td>
+        </tr>
+    }
 
 </table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortProd = ViewBag.CurrentSort, currentFilter1 = ViewBag.currentFilter1 }))
