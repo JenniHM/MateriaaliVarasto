@@ -16,9 +16,9 @@ namespace MateriaaliVarasto.Controllers
 {
     public class ProductController : Controller
     {
-        
-           
+
         MatskuniDBEntities1 db = new MatskuniDBEntities1();
+
         // GET: Product
         public ActionResult Index(string sortProd, string currentFilter1, string searchString1, int? page, int? pagesize)
         {
@@ -34,6 +34,7 @@ namespace MateriaaliVarasto.Controllers
             }
             else
             {
+                
                 ViewBag.LoggedStatus = "In";
 
                 if (searchString1 != null)
@@ -46,6 +47,7 @@ namespace MateriaaliVarasto.Controllers
                 }
 
                 ViewBag.currentFilter1 = searchString1;
+
 
                 var tuotteet = from t in db.Tuotteet
                                select t;

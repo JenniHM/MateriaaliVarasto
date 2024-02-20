@@ -49,6 +49,7 @@ namespace MateriaaliVarasto.Controllers
             {
                 ViewBag.LoginMessage = "Kirjautuminen onnistunut!";
                 ViewBag.LoggedStatus = "Sisäänkirjautunut";
+                ViewBag.LoginError = 0;
                 Session["UserName"] = LoggedUser.UserName;
                 return RedirectToAction("Index", "Home");
             }
@@ -56,8 +57,10 @@ namespace MateriaaliVarasto.Controllers
             {
                 ViewBag.LoginMessage = "Kirjautuminen epäonnistui";
                 ViewBag.LoggedStatus = " ";
+                ViewBag.LoginError = 1;
                 LoginModel.LoginErrorMessage = "Tuntematon käyttäjätunnus tai salasana.";
-                return View("Login", LoginModel);
+                //return View("Login", LoginModel);
+                return View("Index", LoginModel);
             }
         }
 
