@@ -23,9 +23,7 @@ namespace MateriaaliVarasto.Controllers
         public ActionResult Index(string sortProd, string currentFilter1, string searchString1, int? page, int? pagesize)
         {
             ViewBag.CurrentSort = sortProd;
-            ViewBag.ProdNameSortPara = String.IsNullOrEmpty(sortProd) ? "productname_desc" : "";
-
-
+            ViewBag.ProdNameSortPara = string.IsNullOrEmpty(sortProd) ? "productname_desc" : "";
 
             if (Session["UserName"] == null)
             {
@@ -34,7 +32,6 @@ namespace MateriaaliVarasto.Controllers
             }
             else
             {
-                
                 ViewBag.LoggedStatus = "In";
 
                 if (searchString1 != null)
@@ -45,9 +42,7 @@ namespace MateriaaliVarasto.Controllers
                 {
                     searchString1 = currentFilter1;
                 }
-
                 ViewBag.currentFilter1 = searchString1;
-
 
                 var tuotteet = from t in db.Tuotteet
                                select t;
@@ -65,7 +60,6 @@ namespace MateriaaliVarasto.Controllers
                             tuotteet = tuotteet.Where(t => t.Tuotenimi.Contains(searchString1)).OrderBy(t => t.Tuotenimi);
                             break;
                     }
-
                 }
                 else
                 {
@@ -80,14 +74,10 @@ namespace MateriaaliVarasto.Controllers
                             break;
                     }
                 }
-            
-
-            
                 int pageSize = (pagesize ?? 10);
                 int pageNumber = (page ?? 1);
                 return View(tuotteet.ToPagedList(pageNumber, pageSize));
             }
-           
         }
         
         [HttpGet]

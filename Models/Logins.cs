@@ -11,21 +11,21 @@ namespace MateriaaliVarasto.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Logins
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Logins()
+        {
+            this.Tuotteet = new HashSet<Tuotteet>();
+        }
+    
         public int LoginId { get; set; }
-        [DisplayName("Käyttäjätunnus")]
-        [Required(ErrorMessage = "Anna käyttäjätunnus")]
         public string UserName { get; set; }
-        [DisplayName("Salasana")]
-        [DataType(DataType.Password)]
-        [Required(ErrorMessage = "Anna salasana")]
-
         public string PassWord { get; set; }
-      
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tuotteet> Tuotteet { get; set; }
         public string LoginErrorMessage { get; set; }
     }
 }

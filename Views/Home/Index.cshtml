@@ -49,11 +49,7 @@
                             <label class="text-danger">
                                 @Html.DisplayFor(model => model.LoginErrorMessage)
                             </label>
-                            @*<div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Log in to the system" class="btn btn-default" />
-                                    </div>
-                                </div>*@
+                           
                         </div>
                     }
                     <div>
@@ -61,8 +57,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" form="loginForm">Kirjaudu</button>
+                        <a href="@Url.Action("Index", "Home")" />
                     <button type="submit" class="btn btn-secondary" form="loginForm">Peruuta</button>
-                    <a href="@Url.Action("Index", "Home")" />
+                        <a href="@Url.Action("Index", "Home")" />
                 </div>
             </div>
         </div>

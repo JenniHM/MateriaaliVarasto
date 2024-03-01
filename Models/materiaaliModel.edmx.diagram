@@ -13,6 +13,7 @@
         <AssociationConnector Association="MatskuniDBModel.FK_Tuote_Materiaali" />
         <AssociationConnector Association="MatskuniDBModel.FK_Tuote_Ryhmä" />
         <AssociationConnector Association="MatskuniDBModel.FK_Tuote_Valmistaja" />
+        <AssociationConnector Association="MatskuniDBModel.FK_Tuotteet_Logins" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

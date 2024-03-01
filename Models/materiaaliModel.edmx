@@ -39,6 +39,7 @@
           <Property Name="MateriaaliID" Type="int" />
           <Property Name="ValmistajaID" Type="int" />
           <Property Name="ImageLink" Type="nvarchar" MaxLength="500" />
+          <Property Name="LoginId" Type="int" />
         </EntityType>
         <EntityType Name="Valmistajat">
           <Key>
@@ -47,6 +48,18 @@
           <Property Name="ValmistajaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Valmistaja" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Tuotteet_Logins">
+          <End Role="Logins" Type="Self.Logins" Multiplicity="0..1" />
+          <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Logins">
+              <PropertyRef Name="LoginId" />
+            </Principal>
+            <Dependent Role="Tuotteet">
+              <PropertyRef Name="LoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tuotteet_Materiaalit">
           <End Role="Materiaalit" Type="Self.Materiaalit" Multiplicity="0..1" />
           <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="*" />
@@ -89,6 +102,10 @@
           <EntitySet Name="Ryhmät" EntityType="Self.Ryhmät" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tuotteet" EntityType="Self.Tuotteet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Valmistajat" EntityType="Self.Valmistajat" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Tuotteet_Logins" Association="Self.FK_Tuotteet_Logins">
+            <End Role="Logins" EntitySet="Logins" />
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tuotteet_Materiaalit" Association="Self.FK_Tuotteet_Materiaalit">
             <End Role="Materiaalit" EntitySet="Materiaalit" />
             <End Role="Tuotteet" EntitySet="Tuotteet" />
@@ -124,6 +141,10 @@
             <End Role="Valmistajat" EntitySet="Valmistajat" />
             <End Role="Tuotteet" EntitySet="Tuotteet" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tuotteet_Logins" Association="MatskuniDBModel.FK_Tuotteet_Logins">
+            <End Role="Logins" EntitySet="Logins" />
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Logins">
           <Key>
@@ -132,6 +153,7 @@
           <Property Name="LoginId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PassWord" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tuotteet" Relationship="MatskuniDBModel.FK_Tuotteet_Logins" FromRole="Logins" ToRole="Tuotteet" />
         </EntityType>
         <EntityType Name="Materiaalit">
           <Key>
@@ -164,6 +186,8 @@
           <NavigationProperty Name="Materiaalit" Relationship="MatskuniDBModel.FK_Tuote_Materiaali" FromRole="Tuotteet" ToRole="Materiaalit" />
           <NavigationProperty Name="Ryhmät" Relationship="MatskuniDBModel.FK_Tuote_Ryhmä" FromRole="Tuotteet" ToRole="Ryhmät" />
           <NavigationProperty Name="Valmistajat" Relationship="MatskuniDBModel.FK_Tuote_Valmistaja" FromRole="Tuotteet" ToRole="Valmistajat" />
+          <Property Name="LoginId" Type="Int32" />
+          <NavigationProperty Name="Logins" Relationship="MatskuniDBModel.FK_Tuotteet_Logins" FromRole="Tuotteet" ToRole="Logins" />
         </EntityType>
         <EntityType Name="Valmistajat">
           <Key>
@@ -209,6 +233,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tuotteet_Logins">
+          <End Type="MatskuniDBModel.Logins" Role="Logins" Multiplicity="0..1" />
+          <End Type="MatskuniDBModel.Tuotteet" Role="Tuotteet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Logins">
+              <PropertyRef Name="LoginId" />
+            </Principal>
+            <Dependent Role="Tuotteet">
+              <PropertyRef Name="LoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -243,6 +279,7 @@
           <EntitySetMapping Name="Tuotteet">
             <EntityTypeMapping TypeName="MatskuniDBModel.Tuotteet">
               <MappingFragment StoreEntitySet="Tuotteet">
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
                 <ScalarProperty Name="ImageLink" ColumnName="ImageLink" />
                 <ScalarProperty Name="ValmistajaID" ColumnName="ValmistajaID" />
                 <ScalarProperty Name="MateriaaliID" ColumnName="MateriaaliID" />
