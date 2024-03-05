@@ -20,7 +20,10 @@ namespace MateriaaliVarasto.Models
         public string Määrä { get; set; }
         public Nullable<int> RyhmäID { get; set; }
         public Nullable<int> MateriaaliID { get; set; }
+        public string Materiaali {  get; set; }
+
         public Nullable<int> ValmistajaID { get; set; }
+        public string Valmistaja { get; set; }
         public string ImageLink { get; set; }
         public Nullable<int> LoginId { get; set; }
     

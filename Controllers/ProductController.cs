@@ -49,7 +49,6 @@ namespace MateriaaliVarasto.Controllers
 
                 if (!String.IsNullOrEmpty(searchString1))
                 {
-
                     switch (sortProd)
                     {
                         case "productname_desc":
@@ -112,11 +111,12 @@ namespace MateriaaliVarasto.Controllers
             ViewBag.RyhmäID = new SelectList(db.Ryhmät, "RyhmäID", "Ryhmä");
             ViewBag.MateriaaliID = new SelectList(db.Materiaalit, "MateriaaliID", "Materiaali");
             ViewBag.ValmistajaID = new SelectList(db.Valmistajat, "ValmistajaID", "Valmistaja");
+            ViewBag.LoginId = new SelectList(db.Logins, "LoginId", "UserName");
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TuoteID,Tuotenimi,ValmistajaID,RyhmäID,MateriaaliID,Pesty,Määrä")] Tuotteet tuote)
+        public ActionResult Create([Bind(Include = "TuoteID,Tuotenimi,ValmistajaID,RyhmäID,MateriaaliID,Pesty,Määrä,LoginId")] Tuotteet tuote)
         {
             if (ModelState.IsValid)
             {
@@ -125,6 +125,7 @@ namespace MateriaaliVarasto.Controllers
                 ViewBag.RyhmäID = new SelectList(db.Ryhmät, "RyhmäID", "Ryhmä", tuote.RyhmäID);
                 ViewBag.MateriaaliID = new SelectList(db.Materiaalit, "MateriaaliID", "Materiaali", tuote.MateriaaliID);
                 ViewBag.ValmistajaID = new SelectList(db.Valmistajat, "ValmistajaID", "Valmistaja", tuote.ValmistajaID);
+                ViewBag.LoginId = new SelectList(db.Logins, "LoginId", "UserName", tuote.LoginId);
                 return RedirectToAction("Index");
             }
             return View(tuote);
