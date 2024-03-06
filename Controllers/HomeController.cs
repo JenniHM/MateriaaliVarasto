@@ -15,25 +15,22 @@ namespace MateriaaliVarasto.Controllers
             if (Session["UserName"] == null)
             {
                 return RedirectToAction("login", "home");
-                
+
             }
             else ViewBag.LoggedStatus = "In";
             ViewBag.Selain = Request.UserAgent;
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Help()
         {
-            ViewBag.Message = "Tietoja sovelluksesta.";
-
+            ViewBag.Message = "Kuinka käytän ohjelmaa?";
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult OfUs()
         {
-            ViewBag.Message = "Yhteystiedot.";
-
-            return View();
+           return View();
         }
 
         public ActionResult Login()
@@ -59,7 +56,6 @@ namespace MateriaaliVarasto.Controllers
                 ViewBag.LoggedStatus = " ";
                 ViewBag.LoginError = 1;
                 LoginModel.LoginErrorMessage = "Tuntematon käyttäjätunnus tai salasana.";
-                //return View("Login", LoginModel);
                 return View("Index", LoginModel);
             }
         }

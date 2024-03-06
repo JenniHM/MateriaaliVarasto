@@ -9,7 +9,7 @@
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
-        <h4>Kirjaudu sisään:</h4>
+        <h4>Yritäpä kirjautua sisään:login.cshtml</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.LoginId)
@@ -20,6 +20,7 @@
                 @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
             </div>
         </div>
+        <p>onks tää totta</p>
         <div class="form-group">
             @Html.LabelFor(model => model.PassWord, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
