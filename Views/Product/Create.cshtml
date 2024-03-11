@@ -10,6 +10,7 @@
 
 @{
     ViewBag.Title = "Create";
+    ViewBag.Adding = "Etkö löydä listasta etsimääsi?";
 }
 
 <h2>Luo uusi tuote</h2>
@@ -52,6 +53,7 @@
             @Html.LabelFor(model => model.RyhmäID, "Ryhmä", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("RyhmäID", null, htmlAttributes: new { @class = "form-control" })
+               
                 @Html.ValidationMessageFor(model => model.RyhmäID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -62,7 +64,10 @@
                 @Html.DropDownList("MateriaaliID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.MateriaaliID, "", new { @class = "text-danger" })
             </div>
-            @*<button type="button" name="btnMatsku" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#TuoteRuutu">Materiaalin lisäys</button>   <--toimimaton *@
+            <div>
+                @ViewBag.Adding
+                        <button type="button" name="btnMat" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MatRuutu">Lisää uusi materiaali</button>   @*<--toimimaton*@
+                    </div>
         </div>
 
         <div class="form-group">
@@ -71,9 +76,12 @@
                 @Html.DropDownList("ValmistajaID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ValmistajaID, "", new { @class = "text-danger" })
             </div>
-            @*<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#TuoteRuutu">Valmistajan lisäys</button>    <---toimimaton*@
+            <div>
+                @ViewBag.Adding
+                        <button type="button" name="btnVal" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ValmRuutu">Lisää uusi valmistaja</button>    @*<---toimimaton*@
+                    </div>
         </div>
-
+        
         <div class="form-group">
             @Html.LabelFor(model => model.ImageLink, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -81,7 +89,9 @@
                 @Html.ValidationMessageFor(model => model.ImageLink, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div class="form-group">
+            @Html.HiddenFor(x=>x.UserId)
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -90,7 +100,7 @@
     </div>
 
 }
-T@*ässä divissä yritys modal-ikkunasta materiaalinlisäystä varten - ei toimi!*@
+@*ässä divissä yritys modal-ikkunasta materiaalinlisäystä varten - ei toimi!*@
 @*<div class="modal fade" id="TuoteRuutu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="1" aria-labelledby="prodLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

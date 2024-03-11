@@ -1,10 +1,10 @@
 ﻿@model MateriaaliVarasto.Models.Logins
 
-<div class="modal fade" id="loginRuutu" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal" id="LoginRuutu">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Sisäänkirjautuminen</h3>
+                <h3 class="modal-title" id="loginRuutuLabel">Sisäänkirjautuminen</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -41,12 +41,10 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <div>
                     <button type="submit" class="btn btn-primary" form="loginForm">Kirjaudu</button>
                     <a href="@Url.Action("Index", "Home")" />
                     <button type="submit" class="btn btn-secondary" form="loginForm">Peruuta</button>
                     <a href="@Url.Action("Index", "Home")" />
-                </div>
             </div>
         </div>
     </div>

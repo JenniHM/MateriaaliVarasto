@@ -7,17 +7,10 @@
             <ul class="navbar-nav flex-grow-1">
                 <li>@Html.ActionLink("Meistä", "ofus", "home", new { area = "" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Ohjeet", "help", "home", new { area = "" }, new { @class = "nav-link" })</li>
-                
                 <li>@Html.ActionLink("Tuotteet", "index", "product", new { area = "" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Materiaalit", "index", "materials", new { area = "" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Kirjaudu ulos", "logout", "home", new { area = "" }, new { @class = "nav-link" })</li>
             </ul>
-
-            <form class="d-flex">
-                <input class="form-control me-sm-2" type="search" placeholder="hae">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">haku</button>
-            </form>
-
         </div>
     </div>
 </nav>

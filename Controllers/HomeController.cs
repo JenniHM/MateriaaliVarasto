@@ -1,9 +1,10 @@
-﻿using MateriaaliVarasto.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.SqlClient;
 using System.Web.Mvc;
+using MateriaaliVarasto.Models;
 
 namespace MateriaaliVarasto.Controllers
 {
@@ -12,13 +13,7 @@ namespace MateriaaliVarasto.Controllers
        
         public ActionResult Index()
         {
-            if (Session["UserName"] == null)
-            {
-                return RedirectToAction("login", "home");
-
-            }
-            else ViewBag.LoggedStatus = "In";
-            ViewBag.Selain = Request.UserAgent;
+            ViewBag.LoginError = 0;
             return View();
         }
 
@@ -48,6 +43,7 @@ namespace MateriaaliVarasto.Controllers
                 ViewBag.LoggedStatus = "Sisäänkirjautunut";
                 ViewBag.LoginError = 0;
                 Session["UserName"] = LoggedUser.UserName;
+                Session["LoginID"] = LoggedUser.LoginId;
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -65,6 +61,11 @@ namespace MateriaaliVarasto.Controllers
             Session.Abandon();
             ViewBag.LoggedStatus = "Uloskirjautunut";
             return RedirectToAction("Index", "Home");
+        }
+        public ActionResult MustAuthorize()
+        {
+            ViewBag.LoginError = 1;
+            return View("Index"); //pääsivulle autentikontia pyytämään
         }
 
     }

@@ -8,24 +8,19 @@
     <script type="text/javascript">
         $(window).on('load', function () {
             if (@ViewBag.LoginError == 1) {
-                $('#loginRuutu').modal('show');
+                $('#LoginRuutu').modal('show');
             }
-        });
-
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
 }
 
-@{
-    Html.RenderPartial("_LoginModal");
-}
 
 <div class="jumbotron">
     <h2>Tähän voisi upottaa kauniin kuvan?</h2>
+    
+    <img src="~/Images/fabrics.jpg" alt="Colourful fabrics" width="1200" height="300" />
 </div>
 
-@*@{
+@{
     Html.RenderPartial("_LoginModal");
-}*@
+}

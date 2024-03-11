@@ -1,7 +1,5 @@
-﻿@using PagedList.Mvc;
-@using PagedList;
-
-@model PagedList.IPagedList<MateriaaliVarasto.Models.Tuotteet>
+﻿@model PagedList.IPagedList<MateriaaliVarasto.Models.Tuotteet>
+@using PagedList.Mvc;
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
@@ -9,10 +7,36 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Tuotteita varastossa  </h2>
+@section scripts {
+    <script type="text/javascript">
+        $("#singleSelectedMateriaaliID").on("change", function () {
+            //Getting Value
+            var selValue = $("#singleSelectedMateriaaliID").val();
+            document.getElementById("MateriaaliRyhma").value = selValue;
+        });
+
+        //Tässä on jqueryt popup-ikkunaa varten
+        //$(function () {
+        //    $("getProdId").click(function () {
+        //        let prodId = $(this).data("prodid");
+        //        console.log("Klikkasit tuotenumeroa: " + prodId);
+        //        var url = "/Product/_ModalEdit/?id=" + prodId;
+        //        console.log(url);
+
+        //        $("#prodEdit").append(" <b>Avataan tuotteen " + prodId + " muokkausikkuna...</b>");
+
+        //        var $detailDivEdit = $("#prodEdit");
+        //        $.get(url, function (data) {
+        //            $detailDivEdit.replaceWith(data);
+        //            $('ModalProdEdit').modal('show');
+        //        });
+        //    });
+        //});
+    </script>
+}
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create2")
 </p>
 
 @using (Html.BeginForm("Index", "Product", FormMethod.Get))
@@ -20,28 +44,33 @@
     <div class="input-group">
         <p class="px-1">@Html.Label("Etsi nimellä:")</p>
         <p class="px-1">@Html.TextBox("SearchString1", ViewBag.currentFilter1 as string, new { @class = "form-control" })</p>
+        <p class="px-1">@Html.Label("Etsi materiaalin mukaan:")</p>
+        <p class="px-1">@Html.Hidden("MateriaaliRyhma", ViewBag.currentFilter1 as string, new { @id = "MateriaaliRyhma", @class = "form-control" })</p> @*piilotettu kenttä, jolla tehdään kontrollerihaku*@
+        <p class="px-1">@Html.DropDownList("MateriaaliID", null, htmlAttributes: new { @id = "singleSelectedMateriaaliID", @class = "form-control" })</p>
         <p class="px-1"><input type="submit" value="Search" class="form-control" /></p>
     </div>
 }
 
 <table class="table table-hover">
-    <thead class="table-success">
-        <tr>
-            <th>@Html.ActionLink("Tuotteen nimi", "Index", new { sortProd = ViewBag.ProdNameSortPara, currentFilter1 = ViewBag.currentFilter1 })</th>
-            @*<th>@Html.DisplayNameFor(model => model.Valmistajat.Valmistaja)</th>
-            <th>@Html.DisplayNameFor(model => model.Ryhmät.Ryhmä)</th>
-            <th>@Html.DisplayNameFor(model => model.Määrä)</th>
-            <th>@Html.DisplayNameFor(model => model.Materiaalit.Materiaali)</th>
-            <th>@Html.DisplayNameFor(model => model.Pesty)</th>
-            <th>@Html.DisplayNameFor(model => model.ImageLink)</th>*@
+    <tr>
+        <th></th>
+        <th>@Html.ActionLink("Tuotteen nimi", "Index", new { sortProd = ViewBag.ProdNameSortPara, currentFilter1 = ViewBag.currentFilter1 })</th>
+        <th>Valmistaja</th>
+        <th>Ryhmä</th>
+        <th>Määrä</th>
+        <th>Materiaali</th>
+        <th>Pesty</th>
+        <th>ImageLink</th>
+        <th>Käyttäjä</th>
+        <th></th>
+    </tr>
 
-            <th></th>
-        </tr>
-    </thead>
 
     @foreach (var item in Model)
     {
         <tr class="table-warning">
+            <td><button class="getProdId fas fa-edit" data-prodid="@item.TuoteID"></button></td>
+            
             <td>@Html.DisplayFor(modelItem => item.Tuotenimi)</td>
             <td>@Html.DisplayFor(modelItem => item.Valmistajat.Valmistaja)</td>
             <td>@Html.DisplayFor(modelItem => item.Ryhmät.Ryhmä)</td>
@@ -49,6 +78,7 @@
             <td>@Html.DisplayFor(modelItem => item.Materiaalit.Materiaali)</td>
             <td>@Html.DisplayFor(modelItem => item.Pesty)</td>
             <td>@Html.DisplayFor(modelItem => item.ImageLink)</td>
+            <td>@Html.DisplayFor(modelItem => item.Logins.UserName)</td>
 
 
 
