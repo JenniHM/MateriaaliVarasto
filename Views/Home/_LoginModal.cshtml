@@ -1,6 +1,6 @@
 ﻿@model MateriaaliVarasto.Models.Logins
 
-<div class="modal" id="LoginRuutu">
+<div class="modal" id="loginRuutu">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,8 +12,6 @@
                 {
                     @Html.AntiForgeryToken()
                     <div class="form-horizontal">
-                        
-                        <hr />
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         @Html.HiddenFor(model => model.LoginId)
                         <div class="form-group">

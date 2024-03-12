@@ -19,7 +19,6 @@ namespace MateriaaliVarasto.Controllers
 
         public ActionResult Help()
         {
-            ViewBag.Message = "Kuinka käytän ohjelmaa?";
             return View();
         }
 
@@ -28,10 +27,7 @@ namespace MateriaaliVarasto.Controllers
            return View();
         }
 
-        public ActionResult Login()
-        {
-            return View();
-        }
+       
         [HttpPost]
         public ActionResult Authorize(Logins LoginModel)
         {
@@ -65,7 +61,7 @@ namespace MateriaaliVarasto.Controllers
         public ActionResult MustAuthorize()
         {
             ViewBag.LoginError = 1;
-            return View("Index"); //pääsivulle autentikontia pyytämään
+            return View("Index");
         }
 
     }

@@ -6,26 +6,57 @@
    
 }
 <main aria-labelledby="title">
+
     
-    <h2>@ViewBag.Message</h2>
-    <div>
-        <h4>@ViewBag.TitleH1</h4>
-        <p>Päästäksesi näkemään tuotteesi tulee sinun kirjautua sisään järjestelmään.</p>
+    <div class="container mt-3">
+        <h2>Ohjeita ja vinkkejä</h2>
+        <p>Alla olevien otsikoiden alta löydät lisätietoa ja ohjeita ohjelman käyttämiseen. Saat ohjeen auki klikkaamalla kuvaketta.</p>
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header">
+                    <a class="btn" data-bs-toggle="collapse" href="#collapseOne">Kirjautuminen</a>
+                </div>
+                <div id="collapseOne" class="collapse" data-bs-parent="#accordion">
+                    <div class="card-body">
+                        Kirjautumisohjeet
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseTwo">Materiaalien selaus</a>
+                </div>
+                <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
+                    <div class="card-body">
+                        Selitys selaamiselle
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseThree">Tietojen muokkaaminen</a>
+                </div>
+                <div id="collapseThree" class="collapse" data-bs-parent="#accordion">
+                    <div class="card-body">
+                        Miten muokkaan ja poistan
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseFour">Uuden tiedon lisäys</a>
+                </div>
+                <div id="collapseFour" class="collapse" data-bs-parent="#accordion">
+                    <div class="card-body">
+                        Miten lisään uuden?
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <h4>@ViewBag.TitleH2</h4>
-        <p></p>
-    </div>
-    <div>
-        <h4>@ViewBag.TitleH3</h4>
-        <p></p>
-    </div>
-    <div>
-        <h4>@ViewBag.TitleH4</h4>
-        <p></p>
-    </div>
-   
     
-    
-    
+
+
+
+
 </main>
