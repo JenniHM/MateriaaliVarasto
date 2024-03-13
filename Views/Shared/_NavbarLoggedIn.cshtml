@@ -10,7 +10,9 @@
                 <li>@Html.ActionLink("Tuotteet", "index", "product", new { area = "" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Materiaalit", "index", "materials", new { area = "" }, new { @class = "nav-link" })</li>
                 <li>@Html.ActionLink("Kirjaudu ulos", "logout", "home", new { area = "" }, new { @class = "nav-link" })</li>
+                
             </ul>
+            @Session["LoginID"]
         </div>
     </div>
 </nav>

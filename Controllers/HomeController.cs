@@ -5,6 +5,7 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Web.Mvc;
 using MateriaaliVarasto.Models;
+using WebMatrix.WebData;
 
 namespace MateriaaliVarasto.Controllers
 {
@@ -40,6 +41,7 @@ namespace MateriaaliVarasto.Controllers
                 ViewBag.LoginError = 0;
                 Session["UserName"] = LoggedUser.UserName;
                 Session["LoginID"] = LoggedUser.LoginId;
+                
                 return RedirectToAction("Index", "Home");
             }
             else

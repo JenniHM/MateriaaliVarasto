@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
@@ -8,18 +9,23 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.UI.WebControls;
 using MateriaaliVarasto.Models;
 using Microsoft.Ajax.Utilities;
 using PagedList;
+using WebMatrix.WebData;
+
 
 
 namespace MateriaaliVarasto.Controllers
 {
+    
     public class ProductController : Controller
     {
-  
+        
+
         // GET: Product
-        public  ActionResult Index(string sortProd, string currentFilter1, string searchString1, string MateriaaliRyhma, string currentMateriaaliRyhma, int? page, int? pagesize)
+        public  ActionResult Index(string sortProd, string currentFilter1,  string searchString1, string MateriaaliRyhma, string currentMateriaaliRyhma, int? page, int? pagesize)
         {
             ViewBag.CurrentSort = sortProd;
             ViewBag.ProdNameSortPara = string.IsNullOrEmpty(sortProd) ? "productname_desc" : "";
@@ -47,21 +53,18 @@ namespace MateriaaliVarasto.Controllers
 
             if (Session["UserName"] == null)
             {
-                return RedirectToAction("login", "home");
+                return RedirectToAction("index", "home");
             }
             else
             {
-
-
-
+                
                 MatskuniDBEntities1 db = new MatskuniDBEntities1();
-
 
                 var tuotteet = from t in db.Tuotteet
                                select t;
-
-
-
+                
+                
+               
                 if (!String.IsNullOrEmpty(MateriaaliRyhma) && (MateriaaliRyhma != "0"))
                 {
                     int para = int.Parse(MateriaaliRyhma);
@@ -140,11 +143,12 @@ namespace MateriaaliVarasto.Controllers
         }
 
 
+        
         public ActionResult _ModalEdit(int? id)
         {
             if (Session["UserName"] == null)
             {
-                return RedirectToAction("login", "home");
+                return RedirectToAction("index", "home");
             }
             else
             {
@@ -156,14 +160,15 @@ namespace MateriaaliVarasto.Controllers
                 ViewBag.RyhmäID = new SelectList(db.Ryhmät, "RyhmäID", "Ryhmä", tuotteet.RyhmäID);
                 ViewBag.MateriaaliID = new SelectList(db.Materiaalit, "MateriaaliID", "Materiaali", tuotteet.MateriaaliID);
                 ViewBag.ValmistajaID = new SelectList(db.Valmistajat, "ValmistajaID", "Valmistaja", tuotteet.ValmistajaID);
+                //ViewBag.LoginID = new Logins().LoginId;
                 return PartialView("_ModalEdit", tuotteet);
             }
         }
-        public ActionResult _ModalEdit([Bind(Include = "TuoteID,Tuotenimi,ValmistajaID,RyhmäID,MateriaaliID,Pesty,Määrä")] Tuotteet tuote)
+        public ActionResult _ModalEdit([Bind(Include = "TuoteID,Tuotenimi,ValmistajaID,RyhmäID,MateriaaliID,Pesty,Määrä,LoginId")] Tuotteet tuote)
         {
             if (Session["UserName"] == null)
             {
-                return RedirectToAction("login", "home");
+                return RedirectToAction("index", "home");
             }
             else
             {
@@ -186,7 +191,7 @@ namespace MateriaaliVarasto.Controllers
         {
             if (Session["UserName"] == null)
             {
-                return RedirectToAction("login", "home");
+                return RedirectToAction("index", "home");
             }
             else
             {
@@ -207,7 +212,7 @@ namespace MateriaaliVarasto.Controllers
         {
             if (Session["UserName"] == null)
             {
-                return RedirectToAction("login", "home");
+                return RedirectToAction("index", "home");
             }
             else
             {
@@ -229,17 +234,14 @@ namespace MateriaaliVarasto.Controllers
         {
             if (Session["UserName"] == null)
             {
-                return RedirectToAction("login", "home");
+                return RedirectToAction("index", "home");
             }
             else
             {
-           
                 MatskuniDBEntities1 db = new MatskuniDBEntities1();
-
                 ViewBag.RyhmäID = new SelectList(db.Ryhmät, "RyhmäID", "Ryhmä");
                 ViewBag.MateriaaliID = new SelectList(db.Materiaalit, "MateriaaliID", "Materiaali");
                 ViewBag.ValmistajaID = new SelectList(db.Valmistajat, "ValmistajaID", "Valmistaja");
-                //ViewBag.LoginId = new SelectList(db.Logins, "LoginId", "UserName");
                 return View();
             }
         }
@@ -249,7 +251,7 @@ namespace MateriaaliVarasto.Controllers
         {
             if (Session["UserName"] == null)
             {
-                return RedirectToAction("login", "home");
+                return RedirectToAction("index", "home");
             }
             else
             {
@@ -257,12 +259,13 @@ namespace MateriaaliVarasto.Controllers
                
                 if (ModelState.IsValid)
                 {
+                    tuote.LoginId = Convert.ToInt32(Session["LoginID"]);
                     db.Tuotteet.Add(tuote);
                     db.SaveChanges();
                     ViewBag.RyhmäID = new SelectList(db.Ryhmät, "RyhmäID", "Ryhmä", tuote.RyhmäID);
                     ViewBag.MateriaaliID = new SelectList(db.Materiaalit, "MateriaaliID", "Materiaali", tuote.MateriaaliID);
                     ViewBag.ValmistajaID = new SelectList(db.Valmistajat, "ValmistajaID", "Valmistaja", tuote.ValmistajaID);
-                    ViewBag.LoginId = new SelectList(db.Logins, "LoginId", "UserName", tuote.LoginId);
+                   
                     return RedirectToAction("Index");
                 }
                 return View(tuote);
@@ -272,7 +275,7 @@ namespace MateriaaliVarasto.Controllers
         {
             if (Session["UserName"] == null)
             {
-                return RedirectToAction("login", "home");
+                return RedirectToAction("index", "home");
             }
             else
             {
@@ -290,7 +293,7 @@ namespace MateriaaliVarasto.Controllers
         {
             if (Session["UserName"] == null)
             {
-                return RedirectToAction("login", "home");
+                return RedirectToAction("index", "home");
             }
             else
             {
