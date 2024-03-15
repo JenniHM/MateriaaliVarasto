@@ -22,10 +22,9 @@ namespace MateriaaliVarasto.Models
     
         public int MateriaaliID { get; set; }
         public string Materiaali { get; set; }
-        public string MateriaaliIDMateriaali { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tuotteet> Tuotteet { get; set; }
-        
+        public string MateriaaliIDMateriaali { get; set; }
     }
 }

@@ -6,38 +6,45 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    
+
+
 </head>
 <body>
-    @{ 
+    @{
         if (Session["UserName"] == null)
         {
             Html.RenderPartial("_NavbarLoggedOut");
-        }else
+        }
+        else
         {
             Html.RenderPartial("_NavbarLoggedIn");
         }
     }
-   
+
     <div class="container-fluid">
         @RenderBody()
-    </div>  
-    
-        <footer class="oma-footer">
-            @using System.Globalization
-            @{ 
-                string loggausInfo = "";
-                if (Session["UserName"] == null) {
-                    loggausInfo = "Et ole kirjautuneena järjestelmään";
-                } else {
-                    loggausInfo = "Olet kirjautuneena käyttäjänä: " + Session["UserName"];
-                }
+    </div>
+
+    <footer class="oma-footer">
+        @using System.Globalization
+        @{
+            string loggausInfo = "";
+            if (Session["UserName"] == null)
+            {
+                loggausInfo = "Et ole kirjautuneena järjestelmään";
             }
-            <p>&copy; Kulissit kuntoon -järjestelmä. @loggausInfo . Tänään on @DateTime.Today.ToString("D", CultureInfo.CreateSpecificCulture("fi-FI")) </p>
-        </footer>
-    
+            else
+            {
+                loggausInfo = "Olet kirjautuneena käyttäjänä: " + Session["UserName"];
+            }
+        }
+        <p>&copy; Kulissit kuntoon -järjestelmä. @loggausInfo . Tänään on @DateTime.Today.ToString("D", CultureInfo.CreateSpecificCulture("fi-FI")) </p>
+    </footer>
+
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
     @Scripts.Render("~/bundles/jqueryui")
     @RenderSection("scripts", required: false)
 

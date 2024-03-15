@@ -1,13 +1,7 @@
-﻿@{
-    ViewBag.TitleH1 = "Kirjautuminen";
-    ViewBag.TitleH2 = "Varaston selaus";
-    ViewBag.TitleH3 = "Tuotteen muokkaaminen/poistaminen";
-    ViewBag.TitleH4 = "Uuden tiedon lisääminen";
-   
-}
+﻿
 <main aria-labelledby="title">
 
-    
+
     <div class="container mt-3">
         <h2>Ohjeita ja vinkkejä</h2>
         <p>Alla olevien otsikoiden alta löydät lisätietoa ja ohjeita ohjelman käyttämiseen. Saat ohjeen auki klikkaamalla kuvaketta.</p>
@@ -54,9 +48,10 @@
             </div>
         </div>
     </div>
-    
-
-
-
-
 </main>
+
+<div>
+    @{
+        Html.RenderPartial("_LoginModal");
+    }
+</div>

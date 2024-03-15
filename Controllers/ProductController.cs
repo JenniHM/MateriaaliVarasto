@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
@@ -57,14 +58,13 @@ namespace MateriaaliVarasto.Controllers
             }
             else
             {
-                
                 MatskuniDBEntities1 db = new MatskuniDBEntities1();
+                int LoginId = Convert.ToInt32(Session["LoginID"]);
 
                 var tuotteet = from t in db.Tuotteet
+                               where t.LoginId == LoginId
                                select t;
-                
-                
-               
+                                          
                 if (!String.IsNullOrEmpty(MateriaaliRyhma) && (MateriaaliRyhma != "0"))
                 {
                     int para = int.Parse(MateriaaliRyhma);
@@ -132,60 +132,13 @@ namespace MateriaaliVarasto.Controllers
                 }
                 ViewBag.MateriaaliID = new SelectList(lstMaterials, "MateriaaliID", "MateriaaliIDMateriaali", MateriaaliRyhma);
 
-
                 int pageSize = (pagesize ?? 10);
                 int pageNumber = (page ?? 1);
                 
                 return View(tuotteet.ToPagedList(pageNumber, pageSize));
             }
-
-
         }
-
-
-        
-        public ActionResult _ModalEdit(int? id)
-        {
-            if (Session["UserName"] == null)
-            {
-                return RedirectToAction("index", "home");
-            }
-            else
-            {
-                MatskuniDBEntities1 db = new MatskuniDBEntities1();
-
-                if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                Tuotteet tuotteet = db.Tuotteet.Find(id);
-                if (tuotteet == null) return HttpNotFound();
-                ViewBag.RyhmäID = new SelectList(db.Ryhmät, "RyhmäID", "Ryhmä", tuotteet.RyhmäID);
-                ViewBag.MateriaaliID = new SelectList(db.Materiaalit, "MateriaaliID", "Materiaali", tuotteet.MateriaaliID);
-                ViewBag.ValmistajaID = new SelectList(db.Valmistajat, "ValmistajaID", "Valmistaja", tuotteet.ValmistajaID);
-                //ViewBag.LoginID = new Logins().LoginId;
-                return PartialView("_ModalEdit", tuotteet);
-            }
-        }
-        public ActionResult _ModalEdit([Bind(Include = "TuoteID,Tuotenimi,ValmistajaID,RyhmäID,MateriaaliID,Pesty,Määrä,LoginId")] Tuotteet tuote)
-        {
-            if (Session["UserName"] == null)
-            {
-                return RedirectToAction("index", "home");
-            }
-            else
-            {
-                MatskuniDBEntities1 db = new MatskuniDBEntities1();
-
-                if (ModelState.IsValid)
-                {
-                    db.Entry(tuote).State = EntityState.Modified;
-                    db.SaveChanges();
-                    ViewBag.RyhmäID = new SelectList(db.Ryhmät, "RyhmäID", "Ryhmä", tuote.RyhmäID);
-                    ViewBag.MateriaaliID = new SelectList(db.Materiaalit, "MateriaaliID", "Materiaali", tuote.MateriaaliID);
-                    ViewBag.ValmistajaID = new SelectList(db.Valmistajat, "ValmistajaID", "Valmistaja", tuote.ValmistajaID);
-                    return RedirectToAction("Index");
-                }
-                return View(tuote);
-            }
-        }
+                
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -208,7 +161,7 @@ namespace MateriaaliVarasto.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TuoteID,Tuotenimi,ValmistajaID,RyhmäID,MateriaaliID,Pesty,Määrä,LoginId")] Tuotteet tuote)
+        public ActionResult Edit([Bind(Include = "TuoteID,Tuotenimi,ValmistajaID,RyhmäID,MateriaaliID,Pesty,Määrä,Kuva,LoginId")] Tuotteet tuote)
         {
             if (Session["UserName"] == null)
             {
@@ -220,6 +173,8 @@ namespace MateriaaliVarasto.Controllers
 
                 if (ModelState.IsValid)
                 {
+                 
+                    tuote.LoginId = Convert.ToInt32(Session["LoginID"]);
                     db.Entry(tuote).State = EntityState.Modified;
                     db.SaveChanges();
                     ViewBag.RyhmäID = new SelectList(db.Ryhmät, "RyhmäID", "Ryhmä", tuote.RyhmäID);
@@ -247,7 +202,7 @@ namespace MateriaaliVarasto.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create2([Bind(Include = "TuoteID,Tuotenimi,ValmistajaID,RyhmäID,MateriaaliID,Pesty,Määrä,LoginId")] Tuotteet tuote)
+        public ActionResult Create2([Bind(Include = "TuoteID,Tuotenimi,ValmistajaID,RyhmäID,MateriaaliID,Pesty,Määrä,Kuva,LoginId")] Tuotteet tuote)
         {
             if (Session["UserName"] == null)
             {
@@ -259,13 +214,19 @@ namespace MateriaaliVarasto.Controllers
                
                 if (ModelState.IsValid)
                 {
+                    string filename = Path.GetFileNameWithoutExtension(tuote.ImageFile.FileName);
+                    string extension = Path.GetExtension(tuote.ImageFile.FileName);
+                    filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+                    tuote.ImageLink = "~/Image/" + filename;
+                    filename = Path.Combine(Server.MapPath("~/Image/"), filename);
+                    tuote.ImageFile.SaveAs(filename);
                     tuote.LoginId = Convert.ToInt32(Session["LoginID"]);
                     db.Tuotteet.Add(tuote);
                     db.SaveChanges();
                     ViewBag.RyhmäID = new SelectList(db.Ryhmät, "RyhmäID", "Ryhmä", tuote.RyhmäID);
                     ViewBag.MateriaaliID = new SelectList(db.Materiaalit, "MateriaaliID", "Materiaali", tuote.MateriaaliID);
                     ViewBag.ValmistajaID = new SelectList(db.Valmistajat, "ValmistajaID", "Valmistaja", tuote.ValmistajaID);
-                   
+                    
                     return RedirectToAction("Index");
                 }
                 return View(tuote);
@@ -303,5 +264,7 @@ namespace MateriaaliVarasto.Controllers
                 return RedirectToAction("Index");
             }
         }
+    
+
     }
 }

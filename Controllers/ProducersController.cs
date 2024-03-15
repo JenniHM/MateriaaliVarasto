@@ -1,19 +1,16 @@
 ﻿using MateriaaliVarasto.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
-
 namespace MateriaaliVarasto.Controllers
 {
-    public class MaterialsController : Controller
+    public class ProducersController : Controller
     {
-        
-        // GET: Materials
+        // GET: Producers
         public ActionResult Index()
         {
             if (Session["UserName"] == null)
@@ -22,12 +19,13 @@ namespace MateriaaliVarasto.Controllers
             }
             else
             {
-                MatskuniDBEntities1 db = new MatskuniDBEntities1();             
-                return View(db.Materiaalit.ToList());
+                MatskuniDBEntities1 db = new MatskuniDBEntities1();
+                return View(db.Valmistajat.ToList());
             }
         }
         public ActionResult Create()
         {
+
             if (Session["UserName"] == null)
             {
                 return RedirectToAction("Index", "home");
@@ -39,11 +37,11 @@ namespace MateriaaliVarasto.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Materiaalit materiaalit)
+        public ActionResult Create(Valmistajat valmistajat)
         {
             if (Session["UserName"] == null)
             {
-                return RedirectToAction("index", "Home");
+                return RedirectToAction("index", "home");
             }
             else
             {
@@ -51,13 +49,14 @@ namespace MateriaaliVarasto.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    db.Materiaalit.Add(materiaalit);
+                    db.Valmistajat.Add(valmistajat);
                     db.SaveChanges();
-                    return RedirectToAction("Create2", "Product");
+                    return RedirectToAction("Index");
                 }
-                return View(materiaalit);
+                return View(valmistajat);
             }
+
         }
-       
+        
     }
 }

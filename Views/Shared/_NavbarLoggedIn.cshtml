@@ -1,18 +1,24 @@
-﻿<nav class="navbar navbar-expand-sm bg-warning navbar-dark">
+﻿<nav class="navbar navbar-expand-sm bg-warning justify-content-center">
     <div class="container-fluid">
-        <a class=" navbar-brand" href="#">Kulissit kuntoon!</a>
+        <a class=" navbar-brand" href="~/home/index">Kulissit kuntoon!</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-
-        <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-            <ul class="navbar-nav flex-grow-1">
-                <li>@Html.ActionLink("Meistä", "ofus", "home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Ohjeet", "help", "home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Tuotteet", "index", "product", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Materiaalit", "index", "materials", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Kirjaudu ulos", "logout", "home", new { area = "" }, new { @class = "nav-link" })</li>
-                
+        <div class="collapse navbar-collapse" id="collapsibleNavbar2">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="~/home/ofus">Meistä</a></li>
+                <li class="nav-item"><a class="nav-link" href="~/home/help">Ohjeet</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Tuotteet</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="~/product/index">Tuotteet</a></li>
+                        <li><a class="dropdown-item" href="~/materials/index">Materiaalit</a></li>
+                        <li><a class="dropdown-item" href="~/producers/index">Valmistajat</a></li>
+                    </ul>
+                </li>
             </ul>
-            @Session["LoginID"]
+            <a href="~/home/logout" class="btn btn-success" >Kirjaudu ulos</a>      
         </div>
     </div>
 </nav>

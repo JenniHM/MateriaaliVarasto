@@ -10,28 +10,10 @@
 @section scripts {
     <script type="text/javascript">
         $("#singleSelectedMateriaaliID").on("change", function () {
-            //Getting Value
             var selValue = $("#singleSelectedMateriaaliID").val();
             document.getElementById("MateriaaliRyhma").value = selValue;
         });
 
-       ///* Tässä on jqueryt popup-ikkunaa varten*/
-       // $(function () {
-       //     $("getProdId").click(function () {
-       //         let prodId = $(this).data("prodid");
-       //         console.log("Klikkasit tuotenumeroa: " + prodId);
-       //         var url = "/Product/_ModalEdit/?id=" + prodId;
-       //         console.log(url);
-
-       //         $("#prodEdit").append(" <b>Avataan tuotteen " + prodId + " muokkausikkuna...</b>");
-
-       //         var $detailDivEdit = $("#prodEdit");
-       //         $.get(url, function (data) {
-       //             $detailDivEdit.replaceWith(data);
-       //             $('ModalProdEdit').modal('show');
-       //         });
-       //     });
-      /*  });*/
     </script>
 }
 
@@ -61,6 +43,7 @@
         <th>Materiaali</th>
         <th>Pesty</th>
         <th>ImageLink</th>
+        <th>Kuva</th>
         <th>Käyttäjä (testimielessä)</th>
         <th></th>
     </tr>
@@ -78,6 +61,10 @@
             <td>@Html.DisplayFor(modelItem => item.Materiaalit.Materiaali)</td>
             <td>@Html.DisplayFor(modelItem => item.Pesty)</td>
             <td>@Html.DisplayFor(modelItem => item.ImageLink)</td>
+            <td>@Html.DisplayFor(modelItem => item.Kuva) </td>
+            <td>
+          
+            </td>
             <td>@Html.DisplayFor(modelItem => item.Logins.UserName)</td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.TuoteID }) |

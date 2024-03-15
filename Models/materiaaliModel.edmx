@@ -38,7 +38,8 @@
           <Property Name="RyhmäID" Type="int" />
           <Property Name="MateriaaliID" Type="int" />
           <Property Name="ValmistajaID" Type="int" />
-          <Property Name="ImageLink" Type="nvarchar" MaxLength="500" />
+          <Property Name="ImageLink" Type="nvarchar" MaxLength="50" />
+          <Property Name="Kuva" Type="varbinary(max)" />
           <Property Name="LoginId" Type="int" />
         </EntityType>
         <EntityType Name="Valmistajat">
@@ -182,12 +183,13 @@
           <Property Name="RyhmäID" Type="Int32" />
           <Property Name="MateriaaliID" Type="Int32" />
           <Property Name="ValmistajaID" Type="Int32" />
-          <Property Name="ImageLink" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ImageLink" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Materiaalit" Relationship="MatskuniDBModel.FK_Tuote_Materiaali" FromRole="Tuotteet" ToRole="Materiaalit" />
           <NavigationProperty Name="Ryhmät" Relationship="MatskuniDBModel.FK_Tuote_Ryhmä" FromRole="Tuotteet" ToRole="Ryhmät" />
           <NavigationProperty Name="Valmistajat" Relationship="MatskuniDBModel.FK_Tuote_Valmistaja" FromRole="Tuotteet" ToRole="Valmistajat" />
           <Property Name="LoginId" Type="Int32" />
           <NavigationProperty Name="Logins" Relationship="MatskuniDBModel.FK_Tuotteet_Logins" FromRole="Tuotteet" ToRole="Logins" />
+          <Property Name="Kuva" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Valmistajat">
           <Key>
@@ -279,6 +281,7 @@
           <EntitySetMapping Name="Tuotteet">
             <EntityTypeMapping TypeName="MatskuniDBModel.Tuotteet">
               <MappingFragment StoreEntitySet="Tuotteet">
+                <ScalarProperty Name="Kuva" ColumnName="Kuva" />
                 <ScalarProperty Name="LoginId" ColumnName="LoginId" />
                 <ScalarProperty Name="ImageLink" ColumnName="ImageLink" />
                 <ScalarProperty Name="ValmistajaID" ColumnName="ValmistajaID" />

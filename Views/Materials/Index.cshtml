@@ -1,24 +1,29 @@
-﻿
+﻿@model IEnumerable<MateriaaliVarasto.Models.Materiaalit>
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Materiaalit (Index)</h2>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Materiaali ID</th>
-            <th>Materiaali</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (MateriaaliVarasto.Models.Materiaalit mater in Model)
-        {
-            <tr>
-                <td>@mater.MateriaaliID</td>
-                <td>@mater.Materiaali</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<h2>Materiaalit</h2>
 
+<p>
+    @Html.ActionLink("Lisää uusi materiaali listaan", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Materiaali)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Materiaali)
+        </td>
+        
+    </tr>
+}
+
+</table>

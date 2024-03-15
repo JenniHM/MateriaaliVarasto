@@ -135,6 +135,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaterialsController.cs" />
+    <Compile Include="Controllers\ProducersController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -170,7 +171,6 @@
     <Compile Include="Models\Valmistajat.cs">
       <DependentUpon>materiaaliModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\ProductEdit.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap tryout.css" />
@@ -194,6 +194,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\fabrics.jpg" />
     <Content Include="Models\materiaaliModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>materiaaliModel.Context.cs</LastGenOutput>
@@ -349,7 +350,6 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Materials\Index.cshtml" />
     <Content Include="Views\Product\Edit.cshtml" />
-    <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\Product\Delete.cshtml" />
     <Content Include="Views\Shared\_NavbarLoggedIn.cshtml" />
     <Content Include="Views\Shared\_NavbarLoggedOut.cshtml" />
@@ -365,10 +365,12 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Product\Create2.cshtml" />
+    <Content Include="Views\Materials\Create.cshtml" />
+    <Content Include="Views\Producers\Index.cshtml" />
+    <Content Include="Views\Producers\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
