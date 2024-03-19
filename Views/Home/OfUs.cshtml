@@ -3,34 +3,69 @@
     ViewBag.Title = "Tervetuloa!";
     ViewBag.Contact = "Yhteystiedot";
 }
+<div>
+   
+</div>
+<div class="body-content">
+    <main aria-labelledby="title">
+        <h2 id="title">@ViewBag.Title</h2>
 
 
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title</h2>
+        <div>
+            <h4>Käytät Kulissit kuntoon! -ohjelmaa!</h4>
+            <div>
+                <img src="~/Images/fabrics.jpg" alt="Colourful fabrics" width="1000" height="20" />
+            </div>
+            <br />
+            <p>Todellinen käsityöihminen on joko kangas- tai lankahamsteri - pahimmillaan sekä että &#128525;</p>
+            <div>
+                <img src="~/Images/fabrics.jpg" alt="Colourful fabrics" width="1000" height="20" />
+            </div>
+            <br />
+            <p>
+                Olemme suunnitelleet erityisesti tätä varten materiaalinhallintajärjestelmän, jonka avulla on helpompi pysyä käsityksessä, mitä varastoista jo löytyy.
+                Käytämme tässä yhteydessä nimitystä tuotteet, kun puhumme kankaista ja langoista. Materiaali sanaa taas, no, materiaaleista, sillä niitähän löytyy
+                molemmista kategorioista (esim. puuvilla).
+            </p>
+            <div>
+                <img src="~/Images/fabrics.jpg" alt="Colourful fabrics" width="1000" height="20" />
+            </div>
+            <br />
+            <p>
+                Toisinaan (tai jopa pysyvällä statuksella), varastoihin kertyy kuoseja, jotka eivät enää miellytä (liian lapsellinen, liian tyttömäinen, jne),
+                tarjouksesta hankitut 50cm palat eivät enää riitä isoksi kasvaneen lapsen paitaan, tai kun olet suunnitellut neulovasi koko suvulle lahjaksi
+                kirjoneulepaidat, eikä kukaan kärsi pitää villaa yllään! Kankaita ja lankoja ei kannata säilyttää liian pitkään, sillä vaikka ne pyrkii säilömään
+                turvaan pölyltä ja auringonvalolta, niiden kontaminaatiolta ei voi välttyä loputtomiin. Tässä ohjelmastamme on suuri apu!
+            </p>
+            <div>
+                <img src="~/Images/fabrics.jpg" alt="Colourful fabrics" width="1000" height="20" />
+            </div>
+            <br />
+            <p>
+                Kankaita ja lankoja hankkiessa on helppo lisätä järjestelmäämme tuotetiedot, kun ostopaikat/valmistajat ja pesuohjeet ovat vielä tallessa. Tuotetietoja on
+                helppo päivittää käytön mukaan, jolloin varasto pysyy ajantasalla. Kun sitten haaveilee uusista hankinnoista ja vanhoista halajaa eroon, on Kulissit kuntoon!-ohjelma
+                oivallinen apu. Käsityökirppikset pyörivät vilkkaina sosiaalisessa mediassa ja jo kerran tallennettujen tietojen avulla myyminen eri foorumeissa on vaivatonta.
+            </p>
+            <div>
+                <img src="~/Images/fabrics.jpg" alt="Colourful fabrics" width="1000" height="20" />
+            </div>
+        </div>
+        <br />
+        <br />
 
+        <h5>@ViewBag.Contact</h5>
+        <address>
+            Teollisuustie 12<br />
+            06150 Porvoo<br />
+            <abbr title="Phone">Puh:</abbr>
+            (019)5292122
+        </address>
 
-    <div>
-        <h4>Käytät Kulissit kuntoon! -ohjelmaa!</h4>
-        <p>Todellinen käsityöihminen on joko kangas- tai lankahamsteri - pahimmillaan sekä että &#128525;</p>
-        <p>
-            Olemme suunnitelleet erityisesti tätä varten materiaalinhallintajärjestelmän, jonka avulla on helpompi pysyä käsityksessä, mitä varastoista jo löytyy.
-            Käytämme tässä yhteydessä nimitystä tuotteet, kun puhumme kankaista ja langoista. Materiaali sanaa taas, no, materiaaleista, sillä niitähän löytyy
-            molemmista kategorioista (esim. puuvilla).
-        </p>
-    </div>
-    <h6>@ViewBag.Contact</h6>
-    <address>
-        Teollisuustie 12<br />
-        06150 Porvoo<br />
-        <abbr title="Phone">Puh:</abbr>
-        (019)5292122
-    </address>
-
-    <address>
-        <strong>e-mail:</strong>   <a href="mailto:Support@example.com">Support@example.com</a>
-    </address>
-</main>
-
-@{
-    Html.RenderPartial("_LoginModal");
-}
+        <address>
+            <strong>e-mail:</strong>   <a href="mailto:Support@example.com">Support@example.com</a>
+        </address>
+    </main>
+    @{
+        Html.RenderPartial("_LoginModal");
+    }
+</div>

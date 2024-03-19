@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -20,13 +21,13 @@ using WebMatrix.WebData;
 
 namespace MateriaaliVarasto.Controllers
 {
-    
+
     public class ProductController : Controller
     {
-        
+
 
         // GET: Product
-        public  ActionResult Index(string sortProd, string currentFilter1,  string searchString1, string MateriaaliRyhma, string currentMateriaaliRyhma, int? page, int? pagesize)
+        public ActionResult Index(string sortProd, string currentFilter1, string searchString1, string MateriaaliRyhma, string currentMateriaaliRyhma, int? page, int? pagesize)
         {
             ViewBag.CurrentSort = sortProd;
             ViewBag.ProdNameSortPara = string.IsNullOrEmpty(sortProd) ? "productname_desc" : "";
@@ -64,7 +65,7 @@ namespace MateriaaliVarasto.Controllers
                 var tuotteet = from t in db.Tuotteet
                                where t.LoginId == LoginId
                                select t;
-                                          
+                
                 if (!String.IsNullOrEmpty(MateriaaliRyhma) && (MateriaaliRyhma != "0"))
                 {
                     int para = int.Parse(MateriaaliRyhma);
@@ -131,14 +132,14 @@ namespace MateriaaliVarasto.Controllers
                     lstMaterials.Add(uusiMateriaali);
                 }
                 ViewBag.MateriaaliID = new SelectList(lstMaterials, "MateriaaliID", "MateriaaliIDMateriaali", MateriaaliRyhma);
-
+                
                 int pageSize = (pagesize ?? 10);
                 int pageNumber = (page ?? 1);
-                
+
                 return View(tuotteet.ToPagedList(pageNumber, pageSize));
             }
         }
-                
+
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -161,7 +162,7 @@ namespace MateriaaliVarasto.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TuoteID,Tuotenimi,ValmistajaID,RyhmäID,MateriaaliID,Pesty,Määrä,Kuva,LoginId")] Tuotteet tuote)
+        public ActionResult Edit([Bind(Include = "TuoteID,Tuotenimi,ValmistajaID,RyhmäID,MateriaaliID,Pesty,Määrä,KuvaPolku,Kuva,LoginId")] Tuotteet tuote)
         {
             if (Session["UserName"] == null)
             {
@@ -169,102 +170,105 @@ namespace MateriaaliVarasto.Controllers
             }
             else
             {
+               
                 MatskuniDBEntities1 db = new MatskuniDBEntities1();
 
                 if (ModelState.IsValid)
                 {
-                 
-                    tuote.LoginId = Convert.ToInt32(Session["LoginID"]);
-                    db.Entry(tuote).State = EntityState.Modified;
-                    db.SaveChanges();
-                    ViewBag.RyhmäID = new SelectList(db.Ryhmät, "RyhmäID", "Ryhmä", tuote.RyhmäID);
-                    ViewBag.MateriaaliID = new SelectList(db.Materiaalit, "MateriaaliID", "Materiaali", tuote.MateriaaliID);
-                    ViewBag.ValmistajaID = new SelectList(db.Valmistajat, "ValmistajaID", "Valmistaja", tuote.ValmistajaID);
-                    return RedirectToAction("Index");
+                   
+                        tuote.LoginId = Convert.ToInt32(Session["LoginID"]);
+                        db.Entry(tuote).State = EntityState.Modified;
+                   
+                        db.SaveChanges();
+                        ViewBag.RyhmäID = new SelectList(db.Ryhmät, "RyhmäID", "Ryhmä", tuote.RyhmäID);
+                        ViewBag.MateriaaliID = new SelectList(db.Materiaalit, "MateriaaliID", "Materiaali", tuote.MateriaaliID);
+                        ViewBag.ValmistajaID = new SelectList(db.Valmistajat, "ValmistajaID", "Valmistaja", tuote.ValmistajaID);
+                        return RedirectToAction("Index");
+                    }
+                    return View(tuote);
                 }
-                return View(tuote);
             }
-        }
-        public ActionResult Create2()
-        {
+        
+            [HttpGet]
+            public ActionResult Create2()
+            {
+                if (Session["UserName"] == null)
+                {
+                    return RedirectToAction("index", "home");
+                }
+                else
+                {
+
+                    MatskuniDBEntities1 db = new MatskuniDBEntities1();
+                    ViewBag.RyhmäID = new SelectList(db.Ryhmät, "RyhmäID", "Ryhmä");
+                    ViewBag.MateriaaliID = new SelectList(db.Materiaalit, "MateriaaliID", "Materiaali");
+                    ViewBag.ValmistajaID = new SelectList(db.Valmistajat, "ValmistajaID", "Valmistaja");
+                    return View();
+                }
+            }
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public ActionResult Create2([Bind(Include = "TuoteID,Tuotenimi,ValmistajaID,RyhmäID,MateriaaliID,Pesty,Määrä,Kuva,LoginId")] Tuotteet tuote)
+            {
             if (Session["UserName"] == null)
             {
                 return RedirectToAction("index", "home");
             }
             else
-            {
+            { 
+                
                 MatskuniDBEntities1 db = new MatskuniDBEntities1();
-                ViewBag.RyhmäID = new SelectList(db.Ryhmät, "RyhmäID", "Ryhmä");
-                ViewBag.MateriaaliID = new SelectList(db.Materiaalit, "MateriaaliID", "Materiaali");
-                ViewBag.ValmistajaID = new SelectList(db.Valmistajat, "ValmistajaID", "Valmistaja");
-                return View();
-            }
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create2([Bind(Include = "TuoteID,Tuotenimi,ValmistajaID,RyhmäID,MateriaaliID,Pesty,Määrä,Kuva,LoginId")] Tuotteet tuote)
-        {
-            if (Session["UserName"] == null)
-            {
-                return RedirectToAction("index", "home");
-            }
-            else
-            {
-                MatskuniDBEntities1 db = new MatskuniDBEntities1();
-               
+
                 if (ModelState.IsValid)
                 {
-                    string filename = Path.GetFileNameWithoutExtension(tuote.ImageFile.FileName);
-                    string extension = Path.GetExtension(tuote.ImageFile.FileName);
-                    filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-                    tuote.ImageLink = "~/Image/" + filename;
-                    filename = Path.Combine(Server.MapPath("~/Image/"), filename);
-                    tuote.ImageFile.SaveAs(filename);
+                    
                     tuote.LoginId = Convert.ToInt32(Session["LoginID"]);
                     db.Tuotteet.Add(tuote);
                     db.SaveChanges();
                     ViewBag.RyhmäID = new SelectList(db.Ryhmät, "RyhmäID", "Ryhmä", tuote.RyhmäID);
                     ViewBag.MateriaaliID = new SelectList(db.Materiaalit, "MateriaaliID", "Materiaali", tuote.MateriaaliID);
                     ViewBag.ValmistajaID = new SelectList(db.Valmistajat, "ValmistajaID", "Valmistaja", tuote.ValmistajaID);
-                    
+
+                }
+                return RedirectToAction("Index");
+
+            }
+            
+                
+            }
+            public ActionResult Delete(int? id)
+            {
+                if (Session["UserName"] == null)
+                {
+                    return RedirectToAction("index", "home");
+                }
+                else
+                {
+                    MatskuniDBEntities1 db = new MatskuniDBEntities1();
+                    if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    Tuotteet tuotteet = db.Tuotteet.Find(id);
+                    if (tuotteet == null) return HttpNotFound();
+                    return View(tuotteet);
+                }
+            }
+
+            [HttpPost, ActionName("Delete")]
+            [ValidateAntiForgeryToken]
+            public ActionResult DeleteConfirmed(int id)
+            {
+                if (Session["UserName"] == null)
+                {
+                    return RedirectToAction("index", "home");
+                }
+                else
+                {
+                    MatskuniDBEntities1 db = new MatskuniDBEntities1();
+                    Tuotteet tuotteet = db.Tuotteet.Find(id); db.Tuotteet.Remove(tuotteet);
+                    db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                return View(tuote);
             }
-        }
-        public ActionResult Delete(int? id)
-        {
-            if (Session["UserName"] == null)
-            {
-                return RedirectToAction("index", "home");
-            }
-            else
-            {
-                MatskuniDBEntities1 db = new MatskuniDBEntities1();
-                if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                Tuotteet tuotteet = db.Tuotteet.Find(id);
-                if (tuotteet == null) return HttpNotFound();
-                return View(tuotteet);
-            }
-        }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            if (Session["UserName"] == null)
-            {
-                return RedirectToAction("index", "home");
-            }
-            else
-            {
-                MatskuniDBEntities1 db = new MatskuniDBEntities1();
-                Tuotteet tuotteet = db.Tuotteet.Find(id); db.Tuotteet.Remove(tuotteet);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+      
         }
-    
-
     }
-}

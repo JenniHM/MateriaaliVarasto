@@ -11,8 +11,7 @@ namespace MateriaaliVarasto.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web;
-
+    
     public partial class Tuotteet
     {
         public int TuoteID { get; set; }
@@ -22,14 +21,13 @@ namespace MateriaaliVarasto.Models
         public Nullable<int> RyhmäID { get; set; }
         public Nullable<int> MateriaaliID { get; set; }
         public Nullable<int> ValmistajaID { get; set; }
-        public string ImageLink { get; set; }
-        public Nullable<int> LoginId { get; set; }
+        public string KuvaPolku { get; set; }
         public byte[] Kuva { get; set; }
+        public Nullable<int> LoginId { get; set; }
     
+        public virtual Logins Logins { get; set; }
         public virtual Materiaalit Materiaalit { get; set; }
         public virtual Ryhmät Ryhmät { get; set; }
         public virtual Valmistajat Valmistajat { get; set; }
-        public virtual Logins Logins { get; set; }
-        public HttpPostedFileBase ImageFile { get; set; }
     }
 }

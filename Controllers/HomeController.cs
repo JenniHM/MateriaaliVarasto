@@ -4,14 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using MateriaaliVarasto.Models;
 using WebMatrix.WebData;
+using System.Configuration;
 
 namespace MateriaaliVarasto.Controllers
 {
     public class HomeController : Controller
     {
-       
+
         public ActionResult Index()
         {
             ViewBag.LoginError = 0;
@@ -25,10 +27,38 @@ namespace MateriaaliVarasto.Controllers
 
         public ActionResult OfUs()
         {
-           return View();
+            return View();
+        }
+        public ActionResult Register()
+        {
+            return View();
         }
 
-       
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(Logins reg)
+        {
+            MatskuniDBEntities1 db = new MatskuniDBEntities1();
+            if (ModelState.IsValid)
+            {
+                var userExist = db.Logins.Any(x => x.UserName == reg.UserName);
+                if (userExist)
+                {
+                    ModelState.AddModelError("UserName", "Käyttäjätunnus on jo olemassa");
+                    return View(reg);
+                }
+                else
+                {
+                    db.Logins.Add(reg);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+            }
+            return View();
+        }
+
+
         [HttpPost]
         public ActionResult Authorize(Logins LoginModel)
         {
@@ -41,7 +71,7 @@ namespace MateriaaliVarasto.Controllers
                 ViewBag.LoginError = 0;
                 Session["UserName"] = LoggedUser.UserName;
                 Session["LoginID"] = LoggedUser.LoginId;
-                
+
                 return RedirectToAction("Index", "Home");
             }
             else

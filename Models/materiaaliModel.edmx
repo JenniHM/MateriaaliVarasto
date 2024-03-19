@@ -38,7 +38,7 @@
           <Property Name="RyhmäID" Type="int" />
           <Property Name="MateriaaliID" Type="int" />
           <Property Name="ValmistajaID" Type="int" />
-          <Property Name="ImageLink" Type="nvarchar" MaxLength="50" />
+          <Property Name="KuvaPolku" Type="nvarchar" MaxLength="50" />
           <Property Name="Kuva" Type="varbinary(max)" />
           <Property Name="LoginId" Type="int" />
         </EntityType>
@@ -130,20 +130,20 @@
           <EntitySet Name="Ryhmät" EntityType="MatskuniDBModel.Ryhmät" />
           <EntitySet Name="Tuotteet" EntityType="MatskuniDBModel.Tuotteet" />
           <EntitySet Name="Valmistajat" EntityType="MatskuniDBModel.Valmistajat" />
-          <AssociationSet Name="FK_Tuote_Materiaali" Association="MatskuniDBModel.FK_Tuote_Materiaali">
+          <AssociationSet Name="FK_Tuotteet_Logins" Association="MatskuniDBModel.FK_Tuotteet_Logins">
+            <End Role="Logins" EntitySet="Logins" />
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tuotteet_Materiaalit" Association="MatskuniDBModel.FK_Tuotteet_Materiaalit">
             <End Role="Materiaalit" EntitySet="Materiaalit" />
             <End Role="Tuotteet" EntitySet="Tuotteet" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tuote_Ryhmä" Association="MatskuniDBModel.FK_Tuote_Ryhmä">
+          <AssociationSet Name="FK_Tuotteet_Ryhmät" Association="MatskuniDBModel.FK_Tuotteet_Ryhmät">
             <End Role="Ryhmät" EntitySet="Ryhmät" />
             <End Role="Tuotteet" EntitySet="Tuotteet" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tuote_Valmistaja" Association="MatskuniDBModel.FK_Tuote_Valmistaja">
+          <AssociationSet Name="FK_Tuotteet_Valmistaja" Association="MatskuniDBModel.FK_Tuotteet_Valmistaja">
             <End Role="Valmistajat" EntitySet="Valmistajat" />
-            <End Role="Tuotteet" EntitySet="Tuotteet" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tuotteet_Logins" Association="MatskuniDBModel.FK_Tuotteet_Logins">
-            <End Role="Logins" EntitySet="Logins" />
             <End Role="Tuotteet" EntitySet="Tuotteet" />
           </AssociationSet>
         </EntityContainer>
@@ -162,7 +162,7 @@
           </Key>
           <Property Name="MateriaaliID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Materiaali" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Tuotteet" Relationship="MatskuniDBModel.FK_Tuote_Materiaali" FromRole="Materiaalit" ToRole="Tuotteet" />
+          <NavigationProperty Name="Tuotteet" Relationship="MatskuniDBModel.FK_Tuotteet_Materiaalit" FromRole="Materiaalit" ToRole="Tuotteet" />
         </EntityType>
         <EntityType Name="Ryhmät">
           <Key>
@@ -170,7 +170,7 @@
           </Key>
           <Property Name="RyhmäID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ryhmä" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Tuotteet" Relationship="MatskuniDBModel.FK_Tuote_Ryhmä" FromRole="Ryhmät" ToRole="Tuotteet" />
+          <NavigationProperty Name="Tuotteet" Relationship="MatskuniDBModel.FK_Tuotteet_Ryhmät" FromRole="Ryhmät" ToRole="Tuotteet" />
         </EntityType>
         <EntityType Name="Tuotteet">
           <Key>
@@ -183,13 +183,13 @@
           <Property Name="RyhmäID" Type="Int32" />
           <Property Name="MateriaaliID" Type="Int32" />
           <Property Name="ValmistajaID" Type="Int32" />
-          <Property Name="ImageLink" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Materiaalit" Relationship="MatskuniDBModel.FK_Tuote_Materiaali" FromRole="Tuotteet" ToRole="Materiaalit" />
-          <NavigationProperty Name="Ryhmät" Relationship="MatskuniDBModel.FK_Tuote_Ryhmä" FromRole="Tuotteet" ToRole="Ryhmät" />
-          <NavigationProperty Name="Valmistajat" Relationship="MatskuniDBModel.FK_Tuote_Valmistaja" FromRole="Tuotteet" ToRole="Valmistajat" />
+          <Property Name="KuvaPolku" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Kuva" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="LoginId" Type="Int32" />
           <NavigationProperty Name="Logins" Relationship="MatskuniDBModel.FK_Tuotteet_Logins" FromRole="Tuotteet" ToRole="Logins" />
-          <Property Name="Kuva" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Materiaalit" Relationship="MatskuniDBModel.FK_Tuotteet_Materiaalit" FromRole="Tuotteet" ToRole="Materiaalit" />
+          <NavigationProperty Name="Ryhmät" Relationship="MatskuniDBModel.FK_Tuotteet_Ryhmät" FromRole="Tuotteet" ToRole="Ryhmät" />
+          <NavigationProperty Name="Valmistajat" Relationship="MatskuniDBModel.FK_Tuotteet_Valmistaja" FromRole="Tuotteet" ToRole="Valmistajat" />
         </EntityType>
         <EntityType Name="Valmistajat">
           <Key>
@@ -197,44 +197,8 @@
           </Key>
           <Property Name="ValmistajaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Valmistaja" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Tuotteet" Relationship="MatskuniDBModel.FK_Tuote_Valmistaja" FromRole="Valmistajat" ToRole="Tuotteet" />
+          <NavigationProperty Name="Tuotteet" Relationship="MatskuniDBModel.FK_Tuotteet_Valmistaja" FromRole="Valmistajat" ToRole="Tuotteet" />
         </EntityType>
-        <Association Name="FK_Tuote_Materiaali">
-          <End Type="MatskuniDBModel.Materiaalit" Role="Materiaalit" Multiplicity="0..1" />
-          <End Type="MatskuniDBModel.Tuotteet" Role="Tuotteet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Materiaalit">
-              <PropertyRef Name="MateriaaliID" />
-            </Principal>
-            <Dependent Role="Tuotteet">
-              <PropertyRef Name="MateriaaliID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tuote_Ryhmä">
-          <End Type="MatskuniDBModel.Ryhmät" Role="Ryhmät" Multiplicity="0..1" />
-          <End Type="MatskuniDBModel.Tuotteet" Role="Tuotteet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ryhmät">
-              <PropertyRef Name="RyhmäID" />
-            </Principal>
-            <Dependent Role="Tuotteet">
-              <PropertyRef Name="RyhmäID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tuote_Valmistaja">
-          <End Type="MatskuniDBModel.Valmistajat" Role="Valmistajat" Multiplicity="0..1" />
-          <End Type="MatskuniDBModel.Tuotteet" Role="Tuotteet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Valmistajat">
-              <PropertyRef Name="ValmistajaID" />
-            </Principal>
-            <Dependent Role="Tuotteet">
-              <PropertyRef Name="ValmistajaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Tuotteet_Logins">
           <End Type="MatskuniDBModel.Logins" Role="Logins" Multiplicity="0..1" />
           <End Type="MatskuniDBModel.Tuotteet" Role="Tuotteet" Multiplicity="*" />
@@ -247,7 +211,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_Tuotteet_Materiaalit">
+          <End Type="MatskuniDBModel.Materiaalit" Role="Materiaalit" Multiplicity="0..1" />
+          <End Type="MatskuniDBModel.Tuotteet" Role="Tuotteet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materiaalit">
+              <PropertyRef Name="MateriaaliID" />
+            </Principal>
+            <Dependent Role="Tuotteet">
+              <PropertyRef Name="MateriaaliID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tuotteet_Ryhmät">
+          <End Type="MatskuniDBModel.Ryhmät" Role="Ryhmät" Multiplicity="0..1" />
+          <End Type="MatskuniDBModel.Tuotteet" Role="Tuotteet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ryhmät">
+              <PropertyRef Name="RyhmäID" />
+            </Principal>
+            <Dependent Role="Tuotteet">
+              <PropertyRef Name="RyhmäID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tuotteet_Valmistaja">
+          <End Type="MatskuniDBModel.Valmistajat" Role="Valmistajat" Multiplicity="0..1" />
+          <End Type="MatskuniDBModel.Tuotteet" Role="Tuotteet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Valmistajat">
+              <PropertyRef Name="ValmistajaID" />
+            </Principal>
+            <Dependent Role="Tuotteet">
+              <PropertyRef Name="ValmistajaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -281,9 +281,9 @@
           <EntitySetMapping Name="Tuotteet">
             <EntityTypeMapping TypeName="MatskuniDBModel.Tuotteet">
               <MappingFragment StoreEntitySet="Tuotteet">
-                <ScalarProperty Name="Kuva" ColumnName="Kuva" />
                 <ScalarProperty Name="LoginId" ColumnName="LoginId" />
-                <ScalarProperty Name="ImageLink" ColumnName="ImageLink" />
+                <ScalarProperty Name="Kuva" ColumnName="Kuva" />
+                <ScalarProperty Name="KuvaPolku" ColumnName="KuvaPolku" />
                 <ScalarProperty Name="ValmistajaID" ColumnName="ValmistajaID" />
                 <ScalarProperty Name="MateriaaliID" ColumnName="MateriaaliID" />
                 <ScalarProperty Name="RyhmäID" ColumnName="RyhmäID" />

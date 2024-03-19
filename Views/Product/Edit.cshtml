@@ -3,29 +3,10 @@
 @{
     ViewBag.Title = "Edit";
 }
-@*@section scripts{
-<script type="text/javascript">
-        $(function () {
-            $("getValId").click(function () {
-                let valmId = $(this).data("valmid");
-                console.log("Klikkasit tuotenumeroa: " + valmId);
-                var url = "/Product/_ModalEdit/?id=" + valmId;
-                console.log(url);
 
-                $("#valmEdit").append(" <b>Avataan tuotteen " + valmId + " muokkausikkuna...</b>");
-
-                var $detailDivEdit = $("#valmEdit");
-                $.get(url, function (data) {
-                    $detailDivEdit.replaceWith(data);
-                    $('ModalValmEdit').modal('show');
-                });
-            });
-        });
-    </script>
-}*@
 <h2>Muokkaus</h2>
 
-@using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
@@ -34,6 +15,7 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.TuoteID)
+
 
     <div class="form-group">
         @Html.LabelFor(model => model.Tuotenimi, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -88,24 +70,26 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.ImageLink, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.KuvaPolku, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.ImageLink, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ImageLink, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.KuvaPolku, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.KuvaPolku, "", new { @class = "text-danger" })
         </div>
     </div>
+
    
     <div class="form-group">
-        @Html.LabelFor(model => model.Kuva,"Lataa kuva", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Kuva, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            <input type="file" name="file" value="browse" />
-            <br/>
-            <input type="submit" value="upload" />
+            @Html.EditorFor(model => model.Kuva, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Kuva, "", new { @class = "text-danger" })
         </div>
     </div>
+
+
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+            <input type="submit" value="Tallenna" class="btn btn-default" />
         </div>
     </div>
 </div>
