@@ -11,7 +11,7 @@
     @Html.AntiForgeryToken()
 
    
-    <h4>Lisää uusi tuote:</h4>
+    <h3 style="padding-top: 2em">Lisää uusi tuote:</h3>
     <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -34,7 +34,7 @@
             @ViewBag.Adding
         </div>
         <div>
-            <button type="button" name="btnMat" class="btn btn-warning">Lisää uusi valmistaja</button>
+            <input type="button" value="Lisää uusi valmistaja" onclick="location.href='@Url.Action("Create", "Producers")'"/>
         </div>
         <br />
         <div class="form-group">
@@ -57,7 +57,8 @@
             @ViewBag.Adding
         </div>
         <div>
-            <button type="button" name="btnMat" class="btn btn-warning">Lisää uusi materiaali</button>
+            
+            <input type="button" value="Lisää uusi materiaali" onclick="location.href='@Url.Action("Create", "Materials")'"/>
         </div>
     <br/>
     
@@ -82,8 +83,16 @@
             </div>
         </div>
         <br />
-        <div>
-           
+         <div class="form-group">
+             @Html.LabelFor(model => model.Kuva, htmlAttributes: new { @class = "control-label col-md-2" })
+             <div class="col-md-10">
+                 <input type="file" name="file1" id="file1" style="width: 100%;" />
+             </div>
+
+         </div>
+         <br />
+
+         <div>
             @ViewBag.Message
         </div>
 

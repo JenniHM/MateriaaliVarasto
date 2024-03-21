@@ -1,17 +1,17 @@
 ﻿@model MateriaaliVarasto.Models.Logins
 
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Rekisteröityminen";
 }
 
-<h2>Register</h2>
+
 
 @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { @id = "RegForm", @autocomplete = "off"})) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Logins</h4>
+        <h4 style="padding-top: 2em">Rekisteröityminen</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -21,7 +21,7 @@
                 @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <br />
         <div class="form-group">
             @Html.LabelFor(model => model.PassWord, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -29,15 +29,15 @@
                 @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <br />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Luo" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
-
+<br />
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Alkuun", "Index")
 </div>

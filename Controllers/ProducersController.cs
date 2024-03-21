@@ -10,6 +10,7 @@ namespace MateriaaliVarasto.Controllers
 {
     public class ProducersController : Controller
     {
+        MatskuniDBEntities1 db = new MatskuniDBEntities1();
         // GET: Producers
         public ActionResult Index()
         {
@@ -19,7 +20,6 @@ namespace MateriaaliVarasto.Controllers
             }
             else
             {
-                MatskuniDBEntities1 db = new MatskuniDBEntities1();
                 return View(db.Valmistajat.ToList());
             }
         }
@@ -45,13 +45,11 @@ namespace MateriaaliVarasto.Controllers
             }
             else
             {
-                MatskuniDBEntities1 db = new MatskuniDBEntities1();
-
                 if (ModelState.IsValid)
                 {
                     db.Valmistajat.Add(valmistajat);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Create2", "Product");
                 }
                 return View(valmistajat);
             }

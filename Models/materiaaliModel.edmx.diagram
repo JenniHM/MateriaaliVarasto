@@ -5,11 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="68cd52d4c6a440598a359490d758628e" Name="Diagram1">
-        <EntityTypeShape EntityType="MatskuniDBModel.Logins" Width="1.5" PointX="0.75" PointY="7.5" />
-        <EntityTypeShape EntityType="MatskuniDBModel.Materiaalit" Width="1.5" PointX="0.75" PointY="5.25" />
-        <EntityTypeShape EntityType="MatskuniDBModel.Ryhmät" Width="1.5" PointX="0.75" PointY="2.125" />
+        <EntityTypeShape EntityType="MatskuniDBModel.Logins" Width="1.5" PointX="0.75" PointY="1.875" />
+        <EntityTypeShape EntityType="MatskuniDBModel.Materiaalit" Width="1.5" PointX="0.75" PointY="5.125" />
+        <EntityTypeShape EntityType="MatskuniDBModel.Ryhmät" Width="1.5" PointX="0.75" PointY="9.75" />
         <EntityTypeShape EntityType="MatskuniDBModel.Tuotteet" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="MatskuniDBModel.Valmistajat" Width="1.5" PointX="0.75" PointY="10.125" />
+        <EntityTypeShape EntityType="MatskuniDBModel.Valmistajat" Width="1.5" PointX="0.75" PointY="7.5" />
         <AssociationConnector Association="MatskuniDBModel.FK_Tuotteet_Logins" />
         <AssociationConnector Association="MatskuniDBModel.FK_Tuotteet_Materiaalit" />
         <AssociationConnector Association="MatskuniDBModel.FK_Tuotteet_Ryhmät" />

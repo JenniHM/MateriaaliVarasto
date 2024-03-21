@@ -38,7 +38,6 @@
           <Property Name="RyhmäID" Type="int" />
           <Property Name="MateriaaliID" Type="int" />
           <Property Name="ValmistajaID" Type="int" />
-          <Property Name="KuvaPolku" Type="nvarchar" MaxLength="50" />
           <Property Name="Kuva" Type="varbinary(max)" />
           <Property Name="LoginId" Type="int" />
         </EntityType>
@@ -183,7 +182,6 @@
           <Property Name="RyhmäID" Type="Int32" />
           <Property Name="MateriaaliID" Type="Int32" />
           <Property Name="ValmistajaID" Type="Int32" />
-          <Property Name="KuvaPolku" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Kuva" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="LoginId" Type="Int32" />
           <NavigationProperty Name="Logins" Relationship="MatskuniDBModel.FK_Tuotteet_Logins" FromRole="Tuotteet" ToRole="Logins" />
@@ -283,7 +281,6 @@
               <MappingFragment StoreEntitySet="Tuotteet">
                 <ScalarProperty Name="LoginId" ColumnName="LoginId" />
                 <ScalarProperty Name="Kuva" ColumnName="Kuva" />
-                <ScalarProperty Name="KuvaPolku" ColumnName="KuvaPolku" />
                 <ScalarProperty Name="ValmistajaID" ColumnName="ValmistajaID" />
                 <ScalarProperty Name="MateriaaliID" ColumnName="MateriaaliID" />
                 <ScalarProperty Name="RyhmäID" ColumnName="RyhmäID" />

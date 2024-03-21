@@ -13,11 +13,10 @@
             var selValue = $("#singleSelectedMateriaaliID").val();
             document.getElementById("MateriaaliRyhma").value = selValue;
         });
-
     </script>
 }
 
-<p>
+<p style="padding-top: 1em">
     @Html.ActionLink("Lisää uusi", "Create2")
 </p>
 
@@ -41,9 +40,7 @@
         <th>Määrä</th>
         <th>Materiaali</th>
         <th>Pesty</th>
-        <th>Kuvapolku</th>
         <th>Kuva</th>
-        <th>Käyttäjä (testimielessä)</th>
         <th></th>
     </tr>
 
@@ -57,12 +54,18 @@
             <td>@Html.DisplayFor(modelItem => item.Määrä)</td>
             <td>@Html.DisplayFor(modelItem => item.Materiaalit.Materiaali)</td>
             <td>@Html.DisplayFor(modelItem => item.Pesty)</td>
-            <td>@Html.DisplayFor(modelItem => item.KuvaPolku)</td>
-          
-            <td>@Html.DisplayFor(modelItem => item.Kuva)</td>
-          
-
-            <td>@Html.DisplayFor(modelItem => item.Logins.UserName)</td>
+            <td>
+                @if (item.Kuva != null)
+                {
+                    var base64 = Convert.ToBase64String(item.Kuva);
+                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    <img src='@imgsrc' style="max-width:100px;max-height:100px" />
+                }
+                else
+                {
+                    <img src="~/Images/No-Image-Available.png" style="max-width:100px;max-height:100px" />
+                }
+            </td>
             <td>
                 @Html.ActionLink("Muokkaa", "Edit", new { id = item.TuoteID }) |
                 @Html.ActionLink("Poista", "Delete", new { id = item.TuoteID })

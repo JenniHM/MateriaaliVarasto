@@ -12,7 +12,7 @@ namespace MateriaaliVarasto.Controllers
 {
     public class MaterialsController : Controller
     {
-        
+        MatskuniDBEntities1 db = new MatskuniDBEntities1();
         // GET: Materials
         public ActionResult Index()
         {
@@ -21,8 +21,7 @@ namespace MateriaaliVarasto.Controllers
                 return RedirectToAction("index", "home");
             }
             else
-            {
-                MatskuniDBEntities1 db = new MatskuniDBEntities1();             
+            {         
                 return View(db.Materiaalit.ToList());
             }
         }
@@ -47,8 +46,6 @@ namespace MateriaaliVarasto.Controllers
             }
             else
             {
-                MatskuniDBEntities1 db = new MatskuniDBEntities1();
-
                 if (ModelState.IsValid)
                 {
                     db.Materiaalit.Add(materiaalit);

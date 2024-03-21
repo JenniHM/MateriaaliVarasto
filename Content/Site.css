@@ -23,8 +23,21 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    font-family: Papyrus;
 }
 footer {
-    margin-top: auto;
+    margin-top: 20px;   
 }
 
+.otsake {
+    text-align:center;
+    background-color: lavenderblush;
+    color: black;
+    padding: 20px 20px 20px 20px;
+    text-decoration:underline;
+}
+.myImage {
+    width: 100%;
+    height: 20px;
+    content: url("/Images/fabrics.jpg");
+}

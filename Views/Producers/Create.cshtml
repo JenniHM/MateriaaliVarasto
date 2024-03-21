@@ -4,14 +4,14 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
-
+<h2 style="padding-top: 2em">Valmistajat</h2>
+<br />
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Valmistajat</h4>
+        <h4>Lisää uusi valmistaja</h4>
         <h5> - tai liike, josta kangas on hankittu (esim. Eurokangas)</h5>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -22,15 +22,15 @@
                 @Html.ValidationMessageFor(model => model.Valmistaja, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <br />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Luo" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
-
+<br />
 <div>
-    @Html.ActionLink("Takaisin listaan", "Index")
+    @Html.ActionLink("Valmistajat -listaan", "Index")
 </div>

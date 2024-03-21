@@ -1,4 +1,6 @@
 ﻿
+
+
 <main aria-labelledby="title">
 
 
@@ -8,16 +10,16 @@
         <div id="accordion">
             <div class="card">
                 <div class="card-header">
-                    <a class="btn" data-bs-toggle="collapse" href="#collapseOne">Kirjautuminen</a>
+                    <a class="btn" data-bs-toggle="collapse" href="#collapseOne">Kirjautuminen/Rekisteröityminen</a>
                 </div>
                 <div id="collapseOne" class="collapse" data-bs-parent="#accordion">
                     <div class="card-body">
                         Ohjelmaan kirjaudutaan omilla, ennakkoon luoduilla käyttäjätunnuksella ja salasanalla.
                         Klikkaamalla yläosan navigointipalkin oikeassa reunassa olevaa "Kirjaudu sisään"-linkkiä,
                         pääset kirjautumaan sisään ja hallitsemaan omaa varastoasi. Kaikki varastoon kohdistuva toiminta
-                        vaatii kirjautumista vahvistetuilla tunnuksilla.<br/>
+                        vaatii kirjautumista vahvistetuilla tunnuksilla.<br />
                         Omat tunnukset voit helposti luoda "Rekisteröidy"-painikkeen kautta. Rekisteröitymisen jälkeen sinun tulee
-                        kirjautua sisään.
+                        vielä kirjautua sisään.
                     </div>
                 </div>
             </div>
@@ -28,14 +30,13 @@
                 <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
                     <div class="card-body">
                         Kirjauduttuasi sisään onnistuneesti, ylävalikkoon ilmestyy varastojärjestelmän hallintaan oikeuttava
-                        valikko. Tuotteet-valikosta pääset valitsemaan: <br/>
-                        - Tuotteet = tallentamasi langat ja kankaat <br/>
-                        - Materiaalit = materiaalilista, esim. puuvilla, villa, lycra <br/>
-                        - Valmistajat = valmistajat, esim. Novita, Marimekko tai Eurokangas <br/><br/>
-                        Tuotteet-näkymä listaa tallentamasi tuotevaraston. Varastoa voidaan järjestää tuotenimen (esim. 7-veljestä) tai
+                        valikko. Tuotteet-valikosta pääset valitsemaan: <br />
+                        - Tuotteet = tallentamasi langat ja kankaat <br />
+                        - Materiaalit = materiaalilista, esim. puuvilla, villa, lycra <br />
+                        - Valmistajat = valmistajat, esim. Novita, Marimekko tai Eurokangas <br /><br />
+                        Tuotteet-näkymä listaa tallentamasi tuotevaraston. Varastoa voidaan järjestää aakkostamalla tuotenimet (esim. 7-veljestä) tai
                         materiaalin (esim. trikoo) mukaan ryhmitellen. Listassa on myös hakutoiminto sanahaulle. Nämä ryhmittelytoiminnallisuudet
                         ovat varsin käteviä suurehkoja varastoja hallitessa.
-
                     </div>
                 </div>
             </div>
@@ -47,7 +48,7 @@
                     <div class="card-body">
                         Tuotetietoja pääsee muokkaamaan kunkin tuotteen kohdalla olevasta "Muokkaa"-painikkeesta.
                         Muokkaustarve syntyy esimerkiksi kun kangasta/lankaa on käytetty ja määrä vähentynyt tai pesemättömäksi
-                        merkitty kangas on esipesty. <br/>
+                        merkitty kangas on esipesty. <br />
                         Kun tuote on kulutettu loppuun tai myyty, sen voi poistaa painamalla "Poista"-painiketta. Ohjelma varmistaa
                         vielä poiston, sillä tietoja ei voida enää palauttaa.
                     </div>
@@ -61,14 +62,14 @@
                     <div class="card-body">
                         Tuotelistauksen vasemmassa yläkulmassa on painike "Lisää uusi tuote". Tätä painamalla pääset lisäämään kaikki uuden
                         tuotteen tiedot: <br />
-                        - Tuotenimi (langassa esim. 7-veljestä, kankaassa vaikkapa kuosia kuvaava nimi) <br/>
-                        - Valmistaja (esim. Novita, Paapii)<br/>
+                        - Tuotenimi (langassa esim. 7-veljestä, kankaassa vaikkapa kuosia kuvaava nimi) <br />
+                        - Valmistaja (esim. Novita, Paapii)<br />
                         - Tuoteryhmä (kankaat/langat)<br />
                         - Materiaali (esim. silkki, polyesteri)<br />
                         - Määrä (tekstimuotoisena, esim. 300g tai 160x120)<br />
                         - Pesty (kyllä/ei)<br />
                         Valmistajat, tuoteryhmät sekä materiaalit listautuvat automaattisesti. Mikäli et löydä listasta
-                        haluamaasi, löydät kunkin otsakkeen vierestä painikkeen, jonka kautta pääset lisäämään uuden nimen.<br/>
+                        haluamaasi, löydät kunkin otsakkeen vierestä painikkeen, jonka kautta pääset lisäämään uuden nimen.<br />
                         Edellä mainittuja nimikkeitä ei voi muokata tai poistaa ohjelmasta käyttäjän toimesta.
                         Ongelmatilanteissa ole yhteydessä asiakaspalveluumme.
                     </div>
@@ -78,8 +79,8 @@
     </div>
 </main>
 
-<div>
-    @{
-        Html.RenderPartial("_LoginModal");
-    }
-</div>
+@{
+    Html.RenderPartial("_LoginModal");
+}
+
+

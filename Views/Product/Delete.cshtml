@@ -6,30 +6,43 @@
 
 
 
-<h3>Haluatko varmasti poistaa tämän tuotteen?</h3>
+<h2 style="padding-top: 2em">Haluatko varmasti poistaa tämän tuotteen?</h2>
 <div>
     
     <hr />
     <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.Tuotenimi)</dt>
+        <dt>@Html.DisplayNameFor(model => model.Tuotenimi):</dt>
         <dd>@Html.DisplayFor(model => model.Tuotenimi)</dd>
-        <dt>@Html.DisplayNameFor(model => model.Pesty)</dt>
-        <dd>@Html.DisplayFor(model => model.Pesty)</dd>
-        <dt>@Html.DisplayNameFor(model => model.Määrä)</dt>
-        <dd>@Html.DisplayFor(model => model.Määrä)</dd>
-        <dt>@Html.DisplayNameFor(model => model.Materiaalit.Materiaali)</dt>
-        <dd>@Html.DisplayFor(model => model.Materiaalit.Materiaali)</dd>
-        <dt>@Html.DisplayNameFor(model => model.Ryhmät.Ryhmä)</dt>
-        <dd>@Html.DisplayFor(model => model.Ryhmät.Ryhmä)</dd>
-        <dt>@Html.DisplayNameFor(model => model.Valmistajat.Valmistaja)</dt>
+        <dt>@Html.DisplayNameFor(model => model.Valmistajat.Valmistaja):</dt>
         <dd>@Html.DisplayFor(model => model.Valmistajat.Valmistaja)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Ryhmät.Ryhmä):</dt>
+        <dd>@Html.DisplayFor(model => model.Ryhmät.Ryhmä)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Määrä):</dt>
+        <dd>@Html.DisplayFor(model => model.Määrä)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Materiaalit.Materiaali):</dt>
+        <dd>@Html.DisplayFor(model => model.Materiaalit.Materiaali)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Pesty):</dt>
+        <dd>@Html.DisplayFor(model => model.Pesty)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Kuva) </dt>
+        <dd>
+            @if (Model.Kuva != null)
+            {
+                var base64 = Convert.ToBase64String(Model.Kuva);
+                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                <img src='@imgsrc' style="max-width:200px;max-height:200px" />
+            }
+            else
+            {
+                <img src="~/Images/No-Image-Available.png" style="max-width:100px;max-height:100px" />
+            }
+        </dd>
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Poista" class="btn btn-warning" /> |
             @Html.ActionLink("Takaisin listaan", "Index")
         </div>
     }

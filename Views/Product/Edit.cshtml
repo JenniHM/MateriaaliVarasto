@@ -4,97 +4,106 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Muokkaus</h2>
-
-@using (Html.BeginForm())
+<h2 style="padding-top: 2em">Muokkaus</h2>
+<br />
+@using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Tuotteet</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.TuoteID)
+    <div class="form-horizontal">
+        <h4>Tuote:</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.TuoteID)
 
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Tuotenimi, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Tuotenimi, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Tuotenimi, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tuotenimi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tuotenimi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Tuotenimi, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
+        <br />
+        <div class="form-group">
+            @Html.LabelFor(model => model.ValmistajaID, "Valmistaja", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ValmistajaID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ValmistajaID, "", new { @class = "text-danger" })
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.ValmistajaID, "Valmistaja", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("ValmistajaID", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.ValmistajaID, "", new { @class = "text-danger" })
+        </div>
+        <br />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Määrä, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Määrä, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Määrä, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Pesty, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.Label("Kyllä")
+                    @Html.RadioButtonFor(model => model.Pesty, "true")
+                    @Html.Label("Ei")
+                    @Html.RadioButtonFor(model => model.Pesty, "false")
+                    @Html.ValidationMessageFor(model => model.Pesty, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.LabelFor(model => model.RyhmäID, "Ryhmä", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("RyhmäID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RyhmäID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.LabelFor(model => model.MateriaaliID, "Materiaali", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MateriaaliID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MateriaaliID, "", new { @class = "text-danger" })
+            </div>
         </div>
 
-    </div>
+        <br />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Kuva, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (Model.Kuva != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.Kuva);
+                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    <img src='@imgsrc' style="max-width:200px;max-height:200px" />
+                }
+                else
+                {
+                    <img src="~/Images/No-Image-Available.png" style="max-width:100px;max-height:100px" />
+                }
+                <br />
+                <input type="file" name="file1" id="file1" style="width: 100%;" />
 
-    <div id="valEdit"></div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Määrä, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Määrä, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Määrä, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
+        <br />
+       
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Pesty, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.Pesty)
-                @Html.ValidationMessageFor(model => model.Pesty, "", new { @class = "text-danger" })
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Tallenna" class="btn btn-warning" />
             </div>
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.RyhmäID, "Ryhmä", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("RyhmäID", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.RyhmäID, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.MateriaaliID, "Materiaali", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("MateriaaliID", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.MateriaaliID, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.KuvaPolku, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.KuvaPolku, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.KuvaPolku, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-   
-    <div class="form-group">
-        @Html.LabelFor(model => model.Kuva, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Kuva, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Kuva, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Tallenna" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
-
+<br />
 <div>
     @Html.ActionLink("Takaisin listaan", "Index")
 </div>
